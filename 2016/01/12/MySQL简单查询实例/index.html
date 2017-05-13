@@ -1,0 +1,698 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MySQL," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="MySQL查询实例首先创建一个数据库1create database db_student charset utf8
+1. 创建t_student和t_score表t_student12345678CREATE  TABLE  t_student (    id  int unsigned  NOT NULL  UNIQUE  PRIMARY KEY,    # 学号    name  VARC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL查询实例">
+<meta property="og:url" content="http://yoursite.com/2016/01/12/MySQL简单查询实例/index.html">
+<meta property="og:site_name" content="Oasis's Blog">
+<meta property="og:description" content="MySQL查询实例首先创建一个数据库1create database db_student charset utf8
+1. 创建t_student和t_score表t_student12345678CREATE  TABLE  t_student (    id  int unsigned  NOT NULL  UNIQUE  PRIMARY KEY,    # 学号    name  VARC">
+<meta property="og:updated_time" content="2017-05-13T16:39:50.684Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL查询实例">
+<meta name="twitter:description" content="MySQL查询实例首先创建一个数据库1create database db_student charset utf8
+1. 创建t_student和t_score表t_student12345678CREATE  TABLE  t_student (    id  int unsigned  NOT NULL  UNIQUE  PRIMARY KEY,    # 学号    name  VARC">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/01/12/MySQL简单查询实例/"/>
+
+
+
+
+
+  <title> MySQL查询实例 | Oasis's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Oasis's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">宋冶的博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/12/MySQL简单查询实例/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Oasis">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Oasis's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                MySQL查询实例
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-12T21:44:28+08:00">
+                2016-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h2 id="MySQL查询实例"><a href="#MySQL查询实例" class="headerlink" title="MySQL查询实例"></a>MySQL查询实例</h2><h4 id="首先创建一个数据库"><a href="#首先创建一个数据库" class="headerlink" title="首先创建一个数据库"></a><strong>首先创建一个数据库</strong></h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">database</span> db_student <span class="keyword">charset</span> utf8</div></pre></td></tr></table></figure>
+<h4 id="1-创建t-student和t-score表"><a href="#1-创建t-student和t-score表" class="headerlink" title="1. 创建t_student和t_score表"></a><strong>1. 创建t_student和t_score表</strong></h4><p>t_student<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span>  <span class="keyword">TABLE</span>  t_student (</div><div class="line">    <span class="keyword">id</span>  <span class="built_in">int</span> <span class="keyword">unsigned</span>  <span class="keyword">NOT</span> <span class="literal">NULL</span>  <span class="keyword">UNIQUE</span>  PRIMARY <span class="keyword">KEY</span>,    # 学号</div><div class="line">    <span class="keyword">name</span>  <span class="built_in">VARCHAR</span>(<span class="number">20</span>)  <span class="keyword">NOT</span> <span class="literal">NULL</span>,                        # 姓名</div><div class="line">    gender  <span class="built_in">VARCHAR</span>(<span class="number">10</span>)  ,                              # 性别</div><div class="line">    birth <span class="keyword">YEAR</span>,                                         # 出生年份</div><div class="line">    department  <span class="built_in">VARCHAR</span>(<span class="number">20</span>) ,                           # 院系</div><div class="line">    address  <span class="built_in">VARCHAR</span>(<span class="number">50</span>)                                # 家庭住址</div><div class="line">);</div></pre></td></tr></table></figure></p>
+<p>t_score<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span>  <span class="keyword">TABLE</span>  t_score (</div><div class="line">    <span class="keyword">id</span>  <span class="built_in">INT</span>  <span class="keyword">NOT</span> <span class="literal">NULL</span>  <span class="keyword">UNIQUE</span>  PRIMARY <span class="keyword">KEY</span>  AUTO_INCREMENT ,</div><div class="line">    # 编号</div><div class="line">    stu_id  <span class="built_in">INT</span>   <span class="keyword">NOT</span> <span class="literal">NULL</span> ,                                </div><div class="line">    # 学号</div><div class="line">    cls_name  <span class="built_in">VARCHAR</span>(<span class="number">20</span>) ,                             </div><div class="line">    # 课程名</div><div class="line">    score  <span class="built_in">INT</span>(<span class="number">10</span>)                                          </div><div class="line">    # 分数</div><div class="line">);</div></pre></td></tr></table></figure></p>
+<h4 id="2-为t-student表和t-score表增加记录"><a href="#2-为t-student表和t-score表增加记录" class="headerlink" title="2. 为t_student表和t_score表增加记录"></a><strong>2. 为t_student表和t_score表增加记录</strong></h4><p>向t_student表插入记录的INSERT语句如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t_student <span class="keyword">VALUES</span>( <span class="number">901</span>,<span class="string">'乔峰'</span>, <span class="string">'男'</span>,<span class="number">1985</span>,<span class="string">'计算机系'</span>, <span class="string">'北京市海淀区'</span>);</div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t_student <span class="keyword">VALUES</span>( <span class="number">902</span>,<span class="string">'段誉'</span>, <span class="string">'男'</span>,<span class="number">1986</span>,<span class="string">'中文系'</span>, <span class="string">'云南省大理市'</span>);</div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t_student <span class="keyword">VALUES</span>( <span class="number">903</span>,<span class="string">'虚竹'</span>, <span class="string">'女'</span>,<span class="number">1990</span>,<span class="string">'中文系'</span>, <span class="string">'安徽省合肥市'</span>);</div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t_student <span class="keyword">VALUES</span>( <span class="number">904</span>,<span class="string">'慕容复'</span>, <span class="string">'男'</span>,<span class="number">1990</span>,<span class="string">'英语系'</span>, <span class="string">'辽宁省沈阳市'</span>);</div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t_student <span class="keyword">VALUES</span>( <span class="number">905</span>,<span class="string">'王语嫣'</span>, <span class="string">'女'</span>,<span class="number">1991</span>,<span class="string">'英语系'</span>, <span class="string">'福建省厦门市'</span>);</div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t_student <span class="keyword">VALUES</span>( <span class="number">906</span>,<span class="string">'丁春秋'</span>, <span class="string">'男'</span>,<span class="number">1988</span>,<span class="string">'计算机系'</span>, <span class="string">'安徽省黄山市'</span>);</div></pre></td></tr></table></figure></p>
+<p>向t_score表插入记录的INSERT语句如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t_score <span class="keyword">VALUES</span>(<span class="literal">NULL</span>,<span class="number">901</span>, <span class="string">'计算机'</span>,<span class="number">98</span>);</div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t_score <span class="keyword">VALUES</span>(<span class="literal">NULL</span>,<span class="number">901</span>, <span class="string">'英语'</span>, <span class="number">80</span>);</div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t_score <span class="keyword">VALUES</span>(<span class="literal">NULL</span>,<span class="number">902</span>, <span class="string">'计算机'</span>,<span class="number">65</span>);</div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t_score <span class="keyword">VALUES</span>(<span class="literal">NULL</span>,<span class="number">902</span>, <span class="string">'中文'</span>,<span class="number">88</span>);</div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t_score <span class="keyword">VALUES</span>(<span class="literal">NULL</span>,<span class="number">903</span>, <span class="string">'中文'</span>,<span class="number">95</span>);</div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t_score <span class="keyword">VALUES</span>(<span class="literal">NULL</span>,<span class="number">904</span>, <span class="string">'计算机'</span>,<span class="number">70</span>);</div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t_score <span class="keyword">VALUES</span>(<span class="literal">NULL</span>,<span class="number">904</span>, <span class="string">'英语'</span>,<span class="number">92</span>);</div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t_score <span class="keyword">VALUES</span>(<span class="literal">NULL</span>,<span class="number">905</span>, <span class="string">'英语'</span>,<span class="number">94</span>);</div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t_score <span class="keyword">VALUES</span>(<span class="literal">NULL</span>,<span class="number">906</span>, <span class="string">'计算机'</span>,<span class="number">90</span>);</div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t_score <span class="keyword">VALUES</span>(<span class="literal">NULL</span>,<span class="number">906</span>, <span class="string">'英语'</span>,<span class="number">85</span>);</div></pre></td></tr></table></figure></p>
+<h4 id="3-查询t-student表的所有记录"><a href="#3-查询t-student表的所有记录" class="headerlink" title="3. 查询t_student表的所有记录"></a><strong>3. 查询t_student表的所有记录</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from t_student;</div></pre></td></tr></table></figure>
+<p>输出结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">+-----+-----------+--------+-------+--------------+---------------+</div><div class="line">| id  | name      | gender | birth | department   | address       |</div><div class="line">+-----+-----------+--------+-------+--------------+---------------+</div><div class="line">| 901 | 乔峰       | 男     |  1985 | 计算机系     | 北京市海淀区    |</div><div class="line">| 902 | 段誉       | 男     |  1986 | 中文系       | 云南省大理市    |</div><div class="line">| 903 | 虚竹       | 女     |  1990 | 中文系       | 安徽省合肥市    |</div><div class="line">| 904 | 慕容复     | 男     |  1990 | 英语系       | 辽宁省沈阳市    |</div><div class="line">| 905 | 王语嫣     | 女     |  1991 | 英语系       | 福建省厦门市    |</div><div class="line">| 906 | 丁春秋     | 男     |  1983 | 计算机系     | 安徽省黄山市    |</div><div class="line">+-----+-----------+--------+-------+--------------+---------------+</div></pre></td></tr></table></figure>
+<h4 id="4-查询t-student表的第2条到4条记录"><a href="#4-查询t-student表的第2条到4条记录" class="headerlink" title="4. 查询t_student表的第2条到4条记录"></a><strong>4. 查询t_student表的第2条到4条记录</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># select * from t_student where id between 902 and 904;</div><div class="line">select * from t_student limit 1, 3;</div></pre></td></tr></table></figure>
+<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">+-----+-----------+--------+-------+------------+--------------------+</div><div class="line">| id  | name      | gender | birth | department | address            |</div><div class="line">+-----+-----------+--------+-------+------------+--------------------+</div><div class="line">| 902 | 段誉      | 男     |  1986 | 中文系     | 云南省大理市       |</div><div class="line">| 903 | 虚竹      | 女     |  1990 | 中文系     | 安徽省合肥市       |</div><div class="line">| 904 | 慕容复    | 男     |  1990 | 英语系     | 辽宁省沈阳市       |</div><div class="line">+-----+-----------+--------+-------+------------+--------------------+</div></pre></td></tr></table></figure></p>
+<h4 id="5-从t-student表查询所有学生的学号（id）、姓名（name）和院系（department）的信息"><a href="#5-从t-student表查询所有学生的学号（id）、姓名（name）和院系（department）的信息" class="headerlink" title="5. 从t_student表查询所有学生的学号（id）、姓名（name）和院系（department）的信息"></a><strong>5. 从t_student表查询所有学生的学号（id）、姓名（name）和院系（department）的信息</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select id, name, department from t_student;</div></pre></td></tr></table></figure>
+<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">+-----+-----------+--------------+</div><div class="line">| id  | name      | department   |</div><div class="line">+-----+-----------+--------------+</div><div class="line">| 901 | 乔峰      | 计算机系     |</div><div class="line">| 902 | 段誉      | 中文系       |</div><div class="line">| 903 | 虚竹      | 中文系       |</div><div class="line">| 904 | 慕容复    | 英语系       |</div><div class="line">| 905 | 王语嫣    | 英语系       |</div><div class="line">| 906 | 丁春秋    | 计算机系     |</div><div class="line">+-----+-----------+--------------+</div></pre></td></tr></table></figure></p>
+<h4 id="6-从t-student表中查询计算机系和英语系的学生的信息"><a href="#6-从t-student表中查询计算机系和英语系的学生的信息" class="headerlink" title="6. 从t_student表中查询计算机系和英语系的学生的信息"></a><strong>6. 从t_student表中查询计算机系和英语系的学生的信息</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from t_student where department in (&quot;计算机系&quot;, &quot;英语系&quot;);</div></pre></td></tr></table></figure>
+<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">+-----+-----------+--------+-------+--------------+--------------------+</div><div class="line">| id  | name      | gender | birth | department   | address            |</div><div class="line">+-----+-----------+--------+-------+--------------+--------------------+</div><div class="line">| 901 | 乔峰      | 男     |  1985 | 计算机系     | 北京市海淀区       |</div><div class="line">| 904 | 慕容复    | 男     |  1990 | 英语系       | 辽宁省沈阳市       |</div><div class="line">| 905 | 王语嫣    | 女     |  1991 | 英语系       | 福建省厦门市       |</div><div class="line">| 906 | 丁春秋    | 男     |  1988 | 计算机系     | 安徽省黄山市       |</div><div class="line">+-----+-----------+--------+-------+--------------+--------------------+</div></pre></td></tr></table></figure></p>
+<h4 id="7-从t-student表中查询年龄22-26岁的学生信息"><a href="#7-从t-student表中查询年龄22-26岁的学生信息" class="headerlink" title="7. 从t_student表中查询年龄22~26岁的学生信息"></a><strong>7. 从t_student表中查询年龄22~26岁的学生信息</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">select </div><div class="line">id, name, gender, 2017-birth as age, department address </div><div class="line">from </div><div class="line">t_student </div><div class="line">where</div><div class="line">2017-birth between 22 and 26;</div></pre></td></tr></table></figure>
+<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">+-----+-----------+--------+-------+------------+--------------------+</div><div class="line">| id  | name      | gender | age | department | address            |</div><div class="line">+-----+-----------+--------+-------+------------+--------------------+</div><div class="line">| 905 | 王语嫣    | 女     |  26 | 英语系     | 福建省厦门市       |</div><div class="line">+-----+-----------+--------+-------+------------+--------------------+</div></pre></td></tr></table></figure></p>
+<h4 id="8-从t-student表中查询每个院系有多少人"><a href="#8-从t-student表中查询每个院系有多少人" class="headerlink" title="8. 从t_student表中查询每个院系有多少人"></a><strong>8. 从t_student表中查询每个院系有多少人</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select department, count(department) as num from t_student GROUP BY department;</div></pre></td></tr></table></figure>
+<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">+--------------+-----+</div><div class="line">| department   | num |</div><div class="line">+--------------+-----+</div><div class="line">| 中文系       |   2 |</div><div class="line">| 英语系       |   2 |</div><div class="line">| 计算机系     |   2 |</div><div class="line">+--------------+-----+</div></pre></td></tr></table></figure></p>
+<h4 id="9-从t-score表中查询每个科目的最高分"><a href="#9-从t-score表中查询每个科目的最高分" class="headerlink" title="9.从t_score表中查询每个科目的最高分"></a><strong>9.从t_score表中查询每个科目的最高分</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">select </div><div class="line">cls_name, MAX(score) as highestScore</div><div class="line">FROM </div><div class="line">t_score</div><div class="line">GROUP BY</div><div class="line">cls_name;</div></pre></td></tr></table></figure>
+<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">+-----------+--------------+</div><div class="line">| cls_name  | highestScore |</div><div class="line">+-----------+--------------+</div><div class="line">| 中文      |           95 |</div><div class="line">| 英语      |           94 |</div><div class="line">| 计算机    |           98 |</div><div class="line">+-----------+--------------+</div></pre></td></tr></table></figure></p>
+<h4 id="10-查询慕容复的考试科目（cls-name）和考试成绩（score）"><a href="#10-查询慕容复的考试科目（cls-name）和考试成绩（score）" class="headerlink" title="10.查询慕容复的考试科目（cls_name）和考试成绩（score）"></a><strong>10.查询慕容复的考试科目（cls_name）和考试成绩（score）</strong></h4><p>多表连接查询<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">select </div><div class="line">tsc.cls_name, tsc.score </div><div class="line">from </div><div class="line">t_student as tst, t_score as tsc </div><div class="line">where </div><div class="line">tst.name = &quot;慕容复&quot; and tst.id = tsc.stu_id;</div></pre></td></tr></table></figure></p>
+<p>子查询<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">select </div><div class="line">cls_name, score</div><div class="line">from</div><div class="line">t_score</div><div class="line">where</div><div class="line">stu_id = (select id from t_student where name = &quot;慕容复&quot;);</div></pre></td></tr></table></figure></p>
+<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">+-----------+-------+</div><div class="line">| cls_name  | score |</div><div class="line">+-----------+-------+</div><div class="line">| 计算机    |    70 |</div><div class="line">| 英语      |    92 |</div><div class="line">+-----------+-------+</div></pre></td></tr></table></figure></p>
+<h4 id="11-用连接的方式查询所有学生的信息和考试信息"><a href="#11-用连接的方式查询所有学生的信息和考试信息" class="headerlink" title="11.用连接的方式查询所有学生的信息和考试信息"></a><strong>11.用连接的方式查询所有学生的信息和考试信息</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">select </div><div class="line">tst.id, name, gender, birth, department, address, cls_name, score</div><div class="line">from </div><div class="line">t_student as tst, t_score as tsc</div><div class="line">where</div><div class="line">tst.id = tsc.stu_id;</div></pre></td></tr></table></figure>
+<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">+-----+-----------+--------+-------+--------------+--------------------+-----------+-------+</div><div class="line">| id  | name      | gender | birth | department   | address            | cls_name  | score |</div><div class="line">+-----+-----------+--------+-------+--------------+--------------------+-----------+-------+</div><div class="line">| 901 | 乔峰      | 男     |  1985 | 计算机系     | 北京市海淀区       | 计算机    |    98 |</div><div class="line">| 901 | 乔峰      | 男     |  1985 | 计算机系     | 北京市海淀区       | 英语      |    80 |</div><div class="line">| 902 | 段誉      | 男     |  1986 | 中文系       | 云南省大理市       | 计算机    |    65 |</div><div class="line">| 902 | 段誉      | 男     |  1986 | 中文系       | 云南省大理市       | 中文      |    88 |</div><div class="line">| 903 | 虚竹      | 女     |  1990 | 中文系       | 安徽省合肥市       | 中文      |    95 |</div><div class="line">| 904 | 慕容复    | 男     |  1990 | 英语系       | 辽宁省沈阳市       | 计算机    |    70 |</div><div class="line">| 904 | 慕容复    | 男     |  1990 | 英语系       | 辽宁省沈阳市       | 英语      |    92 |</div><div class="line">| 905 | 王语嫣    | 女     |  1991 | 英语系       | 福建省厦门市       | 英语      |    94 |</div><div class="line">| 906 | 丁春秋    | 男     |  1988 | 计算机系     | 安徽省黄山市       | 计算机    |    90 |</div><div class="line">| 906 | 丁春秋    | 男     |  1988 | 计算机系     | 安徽省黄山市       | 英语      |    85 |</div><div class="line">+-----+-----------+--------+-------+--------------+--------------------+-----------+-------</div></pre></td></tr></table></figure></p>
+<h4 id="12-计算每个学生的总成绩"><a href="#12-计算每个学生的总成绩" class="headerlink" title="12.计算每个学生的总成绩"></a><strong>12.计算每个学生的总成绩</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">select </div><div class="line">tst.name, tst.id, sum(tsc.score) as total_score</div><div class="line">from </div><div class="line">t_score as tsc, t_student as tst</div><div class="line">where</div><div class="line">tst.id = tsc.stu_id</div><div class="line">GROUP BY</div><div class="line">name;</div></pre></td></tr></table></figure>
+<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">+-----------+-----+----------------+</div><div class="line">| name      | id  |   total_score  |</div><div class="line">+-----------+-----+----------------+</div><div class="line">| 丁春秋    | 906 |            175 |</div><div class="line">| 乔峰      | 901 |            178 |</div><div class="line">| 慕容复    | 904 |            162 |</div><div class="line">| 段誉      | 902 |            153 |</div><div class="line">| 王语嫣    | 905 |             94 |</div><div class="line">| 虚竹      | 903 |             95 |</div><div class="line">+-----------+-----+----------------+</div></pre></td></tr></table></figure></p>
+<h4 id="13-计算每个考试科目的平均成绩"><a href="#13-计算每个考试科目的平均成绩" class="headerlink" title="13.计算每个考试科目的平均成绩"></a><strong>13.计算每个考试科目的平均成绩</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">select </div><div class="line">cls_name, avg(score)</div><div class="line">from</div><div class="line">t_score</div><div class="line">GROUP BY</div><div class="line">cls_name;</div></pre></td></tr></table></figure>
+<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">+-----------+------------+</div><div class="line">| cls_name  | avg(score) |</div><div class="line">+-----------+------------+</div><div class="line">| 中文      |    91.5000 |</div><div class="line">| 英语      |    86.7500 |</div><div class="line">| 计算机    |    80.7500 |</div><div class="line">+-----------+------------+</div></pre></td></tr></table></figure></p>
+<h4 id="14-查询计算机成绩低于95的学生信息"><a href="#14-查询计算机成绩低于95的学生信息" class="headerlink" title="14.查询计算机成绩低于95的学生信息"></a><strong>14.查询计算机成绩低于95的学生信息</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">select </div><div class="line">tst.*, tsc.cls_name, tsc.score</div><div class="line">from</div><div class="line">t_student tst, t_score tsc</div><div class="line">where</div><div class="line">tsc.cls_name = &quot;计算机&quot; and tsc.score &lt; 95 and tsc.stu_id = tst.id;</div></pre></td></tr></table></figure>
+<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">+-----+-----------+--------+-------+--------------+--------------------+-----------+-------+</div><div class="line">| id  | name      | gender | birth | department   | address            | cls_name  | score |</div><div class="line">+-----+-----------+--------+-------+--------------+--------------------+-----------+-------+</div><div class="line">| 902 | 段誉      | 男     |  1986 | 中文系       | 云南省大理市       | 计算机    |    65 |</div><div class="line">| 904 | 慕容复    | 男     |  1990 | 英语系       | 辽宁省沈阳市       | 计算机    |    70 |</div><div class="line">| 906 | 丁春秋    | 男     |  1988 | 计算机系     | 安徽省黄山市       | 计算机    |    90 |</div><div class="line">+-----+-----------+--------+-------+--------------+--------------------+-----------+-------+</div></pre></td></tr></table></figure></p>
+<h4 id="15-查询同时参加计算机和英语课程的学生的信息"><a href="#15-查询同时参加计算机和英语课程的学生的信息" class="headerlink" title="15.查询同时参加计算机和英语课程的学生的信息"></a><strong>15.查询同时参加计算机和英语课程的学生的信息</strong></h4><p>多表连接查询<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">select </div><div class="line">a.*</div><div class="line">from</div><div class="line">t_student a, t_score b, t_score c</div><div class="line">where</div><div class="line">a.id = b.stu_id and b.cls_name = &quot;计算机&quot;</div><div class="line">and </div><div class="line">a.id = c.stu_id and c.cls_name = &quot;英语&quot;;</div></pre></td></tr></table></figure></p>
+<p>子查询<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">select t_student.*</div><div class="line">from t_student</div><div class="line">where id in</div><div class="line">(select stu_id from t_score where stu_id in </div><div class="line">(select stu_id from t_score where cls_name=&quot;计算机&quot;) and cls_name=&quot;英语&quot;);</div></pre></td></tr></table></figure></p>
+<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">+-----+-----------+--------+-------+--------------+--------------------+</div><div class="line">| id  | name      | gender | birth | department   | address            |</div><div class="line">+-----+-----------+--------+-------+--------------+--------------------+</div><div class="line">| 901 | 乔峰      | 男     |  1985 | 计算机系     | 北京市海淀区       |</div><div class="line">| 904 | 慕容复    | 男     |  1990 | 英语系       | 辽宁省沈阳市       |</div><div class="line">| 906 | 丁春秋    | 男     |  1988 | 计算机系     | 安徽省黄山市       |</div><div class="line">+-----+-----------+--------+-------+--------------+--------------------+</div></pre></td></tr></table></figure></p>
+<h4 id="16-将计算机考试成绩按从高到低进行排序"><a href="#16-将计算机考试成绩按从高到低进行排序" class="headerlink" title="16.将计算机考试成绩按从高到低进行排序"></a><strong>16.将计算机考试成绩按从高到低进行排序</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select stu_id, score from t_score where cls_name = &quot;计算机&quot; order by score desc;</div></pre></td></tr></table></figure>
+<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">+--------+-------+</div><div class="line">| stu_id | score |</div><div class="line">+--------+-------+</div><div class="line">|    901 |    98 |</div><div class="line">|    906 |    90 |</div><div class="line">|    904 |    70 |</div><div class="line">|    902 |    65 |</div><div class="line">+--------+-------+</div></pre></td></tr></table></figure></p>
+<h4 id="17-从t-student表和t-score表中查询出学生的学号，然后合并查询结果"><a href="#17-从t-student表和t-score表中查询出学生的学号，然后合并查询结果" class="headerlink" title="17.从t_student表和t_score表中查询出学生的学号，然后合并查询结果"></a><strong>17.从t_student表和t_score表中查询出学生的学号，然后合并查询结果</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">select id from t_student</div><div class="line">union</div><div class="line">select stu_id from t_score;</div></pre></td></tr></table></figure>
+<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">+-----+</div><div class="line">| id  |</div><div class="line">+-----+</div><div class="line">| 901 |</div><div class="line">| 902 |</div><div class="line">| 903 |</div><div class="line">| 904 |</div><div class="line">| 905 |</div><div class="line">| 906 |</div><div class="line">+-----+</div></pre></td></tr></table></figure></p>
+<h4 id="18-查询姓段或者姓王的同学的姓名、院系和考试科目及成绩"><a href="#18-查询姓段或者姓王的同学的姓名、院系和考试科目及成绩" class="headerlink" title="18.查询姓段或者姓王的同学的姓名、院系和考试科目及成绩"></a><strong>18.查询姓段或者姓王的同学的姓名、院系和考试科目及成绩</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">select name, department, cls_name, score</div><div class="line">from t_student a, t_score b</div><div class="line">where (name like &quot;段%&quot; or name like &quot;王%&quot;) and a.id = b.stu_id;</div></pre></td></tr></table></figure>
+<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">+-----------+------------+-----------+-------+</div><div class="line">| name      | department | cls_name  | score |</div><div class="line">+-----------+------------+-----------+-------+</div><div class="line">| 段誉      | 中文系     | 计算机    |    65 |</div><div class="line">| 段誉      | 中文系     | 中文      |    88 |</div><div class="line">| 王语嫣    | 英语系     | 英语      |    90 |</div><div class="line">+-----------+------------+-----------+-------+</div></pre></td></tr></table></figure></p>
+<h4 id="19-查询都是安徽的学生的姓名、年龄、院系和考试科目及成绩"><a href="#19-查询都是安徽的学生的姓名、年龄、院系和考试科目及成绩" class="headerlink" title="19.查询都是安徽的学生的姓名、年龄、院系和考试科目及成绩"></a><strong>19.查询都是安徽的学生的姓名、年龄、院系和考试科目及成绩</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">select name, birth, department, cls_name, score</div><div class="line">from t_student a, t_score b</div><div class="line">where address like &quot;安徽%&quot; and (a.id = b.stu_id);</div></pre></td></tr></table></figure>
+<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">+-----------+-------+--------------+-----------+-------+</div><div class="line">| name      | birth | department   | cls_name  | score |</div><div class="line">+-----------+-------+--------------+-----------+-------+</div><div class="line">| 虚竹      |  1990 | 中文系       | 中文      |    95 |</div><div class="line">| 丁春秋    |  1988 | 计算机系     | 计算机    |    90 |</div><div class="line">| 丁春秋    |  1988 | 计算机系     | 英语      |    85 |</div><div class="line">+-----------+-------+--------------+-----------+-------+</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/04/Markdown-简明语法/" rel="next" title="Markdown简明语法">
+                <i class="fa fa-chevron-left"></i> Markdown简明语法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/08/CSS-margin-top-clear-float/" rel="prev" title="CSS中的margin-top塌陷和清除浮动">
+                CSS中的margin-top塌陷和清除浮动 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Oasis" />
+          <p class="site-author-name" itemprop="name">Oasis</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL查询实例"><span class="nav-number">1.</span> <span class="nav-text">MySQL查询实例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#首先创建一个数据库"><span class="nav-number">1.0.1.</span> <span class="nav-text">首先创建一个数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-创建t-student和t-score表"><span class="nav-number">1.0.2.</span> <span class="nav-text">1. 创建t_student和t_score表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-为t-student表和t-score表增加记录"><span class="nav-number">1.0.3.</span> <span class="nav-text">2. 为t_student表和t_score表增加记录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-查询t-student表的所有记录"><span class="nav-number">1.0.4.</span> <span class="nav-text">3. 查询t_student表的所有记录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-查询t-student表的第2条到4条记录"><span class="nav-number">1.0.5.</span> <span class="nav-text">4. 查询t_student表的第2条到4条记录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-从t-student表查询所有学生的学号（id）、姓名（name）和院系（department）的信息"><span class="nav-number">1.0.6.</span> <span class="nav-text">5. 从t_student表查询所有学生的学号（id）、姓名（name）和院系（department）的信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-从t-student表中查询计算机系和英语系的学生的信息"><span class="nav-number">1.0.7.</span> <span class="nav-text">6. 从t_student表中查询计算机系和英语系的学生的信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-从t-student表中查询年龄22-26岁的学生信息"><span class="nav-number">1.0.8.</span> <span class="nav-text">7. 从t_student表中查询年龄22~26岁的学生信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-从t-student表中查询每个院系有多少人"><span class="nav-number">1.0.9.</span> <span class="nav-text">8. 从t_student表中查询每个院系有多少人</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-从t-score表中查询每个科目的最高分"><span class="nav-number">1.0.10.</span> <span class="nav-text">9.从t_score表中查询每个科目的最高分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-查询慕容复的考试科目（cls-name）和考试成绩（score）"><span class="nav-number">1.0.11.</span> <span class="nav-text">10.查询慕容复的考试科目（cls_name）和考试成绩（score）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-用连接的方式查询所有学生的信息和考试信息"><span class="nav-number">1.0.12.</span> <span class="nav-text">11.用连接的方式查询所有学生的信息和考试信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-计算每个学生的总成绩"><span class="nav-number">1.0.13.</span> <span class="nav-text">12.计算每个学生的总成绩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-计算每个考试科目的平均成绩"><span class="nav-number">1.0.14.</span> <span class="nav-text">13.计算每个考试科目的平均成绩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14-查询计算机成绩低于95的学生信息"><span class="nav-number">1.0.15.</span> <span class="nav-text">14.查询计算机成绩低于95的学生信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-查询同时参加计算机和英语课程的学生的信息"><span class="nav-number">1.0.16.</span> <span class="nav-text">15.查询同时参加计算机和英语课程的学生的信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#16-将计算机考试成绩按从高到低进行排序"><span class="nav-number">1.0.17.</span> <span class="nav-text">16.将计算机考试成绩按从高到低进行排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#17-从t-student表和t-score表中查询出学生的学号，然后合并查询结果"><span class="nav-number">1.0.18.</span> <span class="nav-text">17.从t_student表和t_score表中查询出学生的学号，然后合并查询结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#18-查询姓段或者姓王的同学的姓名、院系和考试科目及成绩"><span class="nav-number">1.0.19.</span> <span class="nav-text">18.查询姓段或者姓王的同学的姓名、院系和考试科目及成绩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#19-查询都是安徽的学生的姓名、年龄、院系和考试科目及成绩"><span class="nav-number">1.0.20.</span> <span class="nav-text">19.查询都是安徽的学生的姓名、年龄、院系和考试科目及成绩</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Oasis</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
