@@ -72,7 +72,7 @@
 <meta property="og:image" content="http://opfgqseiq.bkt.clouddn.com/17-5-8/63183283-file_1494247802315_1a82.png">
 <meta property="og:image" content="http://opfgqseiq.bkt.clouddn.com/17-5-8/728913-file_1494247802427_be05.png">
 <meta property="og:image" content="http://opfgqseiq.bkt.clouddn.com/17-5-8/70430055-file_1494247802206_13310.png">
-<meta property="og:updated_time" content="2017-05-13T16:35:11.894Z">
+<meta property="og:updated_time" content="2017-05-16T10:13:15.782Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python搭建简单静态web服务器">
 <meta name="twitter:description" content="1. 思路分析&amp;emsp;&amp;emsp;搭建简单静态服务器，核心思想即按照HTTP协议，服务器获取客户端（浏览器）发送的HTTP报文，通过解析Request Headers（请求头）信息，返回Response（响应头+响应体）信息。一般的Request Header信息（以百度为例）格式如下：&amp;emsp;&amp;emsp;GET / HTTP/1.1&amp;emsp;&amp;emsp;Host: www.baidu">
@@ -303,7 +303,7 @@
       
         <hr>
 <h2 id="1-思路分析"><a href="#1-思路分析" class="headerlink" title="1. 思路分析"></a>1. 思路分析</h2><p>&emsp;&emsp;搭建简单静态服务器，核心思想即按照HTTP协议，服务器获取客户端（浏览器）发送的HTTP报文，通过解析Request Headers（请求头）信息，返回Response（响应头+响应体）信息。一般的Request Header信息（以百度为例）格式如下：<br>&emsp;&emsp;<code>GET / HTTP/1.1</code><br>&emsp;&emsp;<code>Host: www.baidu.com</code><br>&emsp;&emsp;<code>Connection: keep-alive</code><br>&emsp;&emsp;<code>...</code></p>
-<p>&emsp;&emsp;Response Header信息格式如下：<br>&emsp;&emsp;<code>HTTP/1.1 200 OK</code><br>&emsp;&emsp;<code>Server: bfe/1.0.8.18</code><br>&emsp;&emsp;<code>Date: Mon, 08 May 2017 09:35:12 GMT</code><br>&emsp;&emsp;<code>Content-Type: text/html; charset=utf-8</code><br>&emsp;&emsp;<code>...</code></p>
+<p>&emsp;&emsp;Response Header信息格式如下：<br>&emsp;&emsp;<code>HTTP/1.1 200 OK</code><br>&emsp;&emsp;<code>Server: bfe/1.0.8.18</code><br>&emsp;&emsp;<code>Date: Mon, 08 May 2017 09:35:12 GMT</code><br>&emsp;&emsp;<code>Content-Type: text/html; charset=utf-8</code><br>&emsp;&emsp;<code>...</code><br><a id="more"></a></p>
 <h4 id="核心流程"><a href="#核心流程" class="headerlink" title="核心流程"></a>核心流程</h4><ol>
 <li>服务器通过接收客户端发送的数据，解析首行（第一行为行）数据，判断行为（如：”GET”），路径信息（如：”/“或”/index.html”）。</li>
 <li>运用正则表达式或字符串处理方法，获取行为和路径后，可使用异常捕获（try，exept）进行判断：<br>&emsp;&emsp;&emsp;如果客户端请求正确则读取本地html文件，发送至客户端；反之，返回404信息。</li>
@@ -464,7 +464,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -531,7 +531,7 @@
 
 
 <div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  Powered By Oasis
 </div>
 
 <div class="theme-info">

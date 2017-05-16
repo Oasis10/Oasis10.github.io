@@ -45,7 +45,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="MySQL,Python," />
 
 
 
@@ -61,13 +61,55 @@
 
 
 
+<meta name="description" content="一、MySQL模块安装与导入
+python2安装
+sudo pip install mysql-python
+
+
+python3安装
+
+sudo pip3 install pymysql
+
+以下编译环境均为python2
+
+
+
+导入1import MySQLdb">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python-MySQL简单交互实例">
 <meta property="og:url" content="http://yoursite.com/2017/05/16/Python-MySQL简单交互实例/index.html">
 <meta property="og:site_name" content="Oasis's Blog">
-<meta property="og:updated_time" content="2017-05-16T06:17:22.006Z">
+<meta property="og:description" content="一、MySQL模块安装与导入
+python2安装
+sudo pip install mysql-python
+
+
+python3安装
+
+sudo pip3 install pymysql
+
+以下编译环境均为python2
+
+
+
+导入1import MySQLdb">
+<meta property="og:updated_time" content="2017-05-16T10:37:55.805Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python-MySQL简单交互实例">
+<meta name="twitter:description" content="一、MySQL模块安装与导入
+python2安装
+sudo pip install mysql-python
+
+
+python3安装
+
+sudo pip3 install pymysql
+
+以下编译环境均为python2
+
+
+
+导入1import MySQLdb">
 
 
 
@@ -292,7 +334,54 @@
       
 
       
-        
+        <hr>
+<h2 id="一、MySQL模块安装与导入"><a href="#一、MySQL模块安装与导入" class="headerlink" title="一、MySQL模块安装与导入"></a>一、MySQL模块安装与导入</h2><ul>
+<li>python2安装<blockquote>
+<p>sudo pip install mysql-python</p>
+</blockquote>
+</li>
+<li><p>python3安装</p>
+<blockquote>
+<p>sudo pip3 install pymysql</p>
+</blockquote>
+<p><em>以下编译环境均为python2</em></p>
+</li>
+</ul>
+<ul>
+<li>导入<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> MySQLdb</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<a id="more"></a>
+<h2 id="二、connect对象"><a href="#二、connect对象" class="headerlink" title="二、connect对象"></a>二、connect对象</h2><ul>
+<li>connect对象用于与MySQL数据库建立连接</li>
+<li>使用connect方法创建对象  <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conn = MySQLdb.connect(parameterList)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>参数列表</p>
+<blockquote>
+<p>host:&emsp; 连接的MySQL主机，如果是本机则为”localhost”<br>  port: &emsp;连接的MySQL主机端口，默认3306<br>  user: &emsp;连接的MySQL主机用户名<br>  passwd: &emsp;连接的MySQL主机密码<br>  db: &emsp;连接的MySQL主机某个数据库<br>  charset: &emsp;通信编码方式，建议”utf8”</p>
+</blockquote>
+</li>
+<li><p>对象方法</p>
+<blockquote>
+<p>close()&emsp;关闭连接<br>  commit()&emsp;事务，所以需要提交才会生效<br>  rollback()&emsp;事务，放弃之前的操作<br>  cursor()&emsp;返回cursor对象，用于执行sql语句并获得结果</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="三、cursor对象"><a href="#三、cursor对象" class="headerlink" title="三、cursor对象"></a>三、cursor对象</h2><ul>
+<li>对象方法<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">close() </div><div class="line"><span class="comment"># 关闭 </span></div><div class="line"></div><div class="line">execute(operation [, parameters ]) </div><div class="line"><span class="comment"># 执行语句，返回受影响的行数，主要用于执行insert、update、delete语句，也可以执行create、alter、drop等语句</span></div><div class="line"></div><div class="line">fetchone()</div><div class="line"><span class="comment"># 执行查询语句时，获取查询结果集的第一个行数据，返回一个元组</span></div><div class="line"></div><div class="line">next()</div><div class="line"><span class="comment"># 执行查询语句时，获取当前行的下一行</span></div><div class="line"></div><div class="line">fetchall()</div><div class="line"><span class="comment"># 执行查询时，获取结果集的所有行，一行构成一个元组，再将这些元组装入一个元组返回</span></div><div class="line"></div><div class="line">scroll(value[,mode])</div><div class="line"><span class="comment"># 将行指针移动到某个位置</span></div><div class="line"><span class="comment"># mode表示移动的方式</span></div><div class="line"><span class="comment"># mode的默认值为relative，表示基于当前行移动到value，value为正则向下移动，value为负则向上移动</span></div><div class="line"><span class="comment"># mode的值为absolute，表示基于第一条数据的位置，第一条数据的位置为0</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="四、代码实现"><a href="#四、代码实现" class="headerlink" title="四、代码实现"></a>四、代码实现</h2><ul>
+<li><p><strong>功能实现部分</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># coding:utf-8</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> MySQLdb</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThreeKingDoms</span><span class="params">()</span>:</span></div><div class="line">    <span class="string">"""创建三国数据库类"""</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, host, port, user, passwd, db, charset=<span class="string">"utf8"</span>)</span>:</span></div><div class="line">        <span class="string">"""初始化"""</span></div><div class="line">        self.__host = host</div><div class="line">        self.__port = port</div><div class="line">        self.__user = user</div><div class="line">        self.__passwd = passwd</div><div class="line">        self.__db = db</div><div class="line">        self.__charset = charset</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__open</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">"""建立python和MySQL的连接"""</span></div><div class="line">        self.__conn = MySQLdb.connect(</div><div class="line">            host = self.__host,</div><div class="line">            port = self.__port,</div><div class="line">            user = self.__user,</div><div class="line">            passwd = self.__passwd,</div><div class="line">            db = self.__db,</div><div class="line">            charset = self.__charset</div><div class="line">        )</div><div class="line">        self.__cursor = self.__conn.cursor()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__close</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">"""关闭连接"""</span></div><div class="line">        self.__cursor.close()</div><div class="line">        self.__conn.close()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insert</span><span class="params">(self, name, age, gender, state)</span>:</span></div><div class="line">        <span class="string">"""增加数据"""</span></div><div class="line">        self.__open()</div><div class="line">        <span class="comment"># 构造sql语句</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            sql = <span class="string">"INSERT INTO t_hero(name, age, gender, state)  \</span></div><div class="line">                   VALUES (%s, %s, %s, %s)"</div><div class="line">            <span class="comment"># 执行sql语句</span></div><div class="line">            result = self.__cursor.execute(sql, [name, age, gender, state])</div><div class="line">            <span class="comment"># 判断是否执行成功</span></div><div class="line">            <span class="keyword">if</span> result == <span class="number">1</span>:</div><div class="line">                self.__conn.commit()</div><div class="line">                <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">        <span class="keyword">except</span> Exception, e:</div><div class="line">            <span class="keyword">print</span> <span class="string">"添加失败，错误代码为："</span>, e</div><div class="line">            <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">        <span class="keyword">finally</span>:</div><div class="line">            self.__close()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">delete</span><span class="params">(self, h_id)</span>:</span></div><div class="line">        <span class="string">"""删除某条数据"""</span></div><div class="line">        self.__open()</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            <span class="comment"># 构造sql语句</span></div><div class="line">            sql = <span class="string">"DELETE FROM t_hero WHERE id = %s"</span></div><div class="line">            <span class="comment"># 执行sql语句</span></div><div class="line">            result = self.__cursor.execute(sql, [h_id])</div><div class="line">            <span class="comment"># 判断是否执行成功</span></div><div class="line">            <span class="keyword">if</span> result == <span class="number">1</span>:</div><div class="line">                self.__conn.commit()</div><div class="line">                <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">        <span class="keyword">except</span> Exception, e:</div><div class="line">            <span class="keyword">print</span> <span class="string">"删除出错！错误代码为："</span>, e</div><div class="line">            <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">        <span class="keyword">finally</span>:</div><div class="line">            self.__close()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">update</span><span class="params">(self, h_id, option, name=<span class="number">0</span>, age=<span class="number">0</span>, gender=<span class="number">0</span>, state=<span class="number">0</span>)</span>:</span></div><div class="line">        <span class="string">"""修改某条数据"""</span></div><div class="line">        self.__open()</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            <span class="comment"># 构造sql语句</span></div><div class="line">            sql = <span class="string">"UPDATE t_hero SET "</span> + option + <span class="string">" = %s WHERE id = %s"</span></div><div class="line">            <span class="keyword">print</span> sql</div><div class="line">            <span class="comment"># 执行sql语句</span></div><div class="line">            <span class="comment"># 修改姓名</span></div><div class="line">            <span class="keyword">if</span> option == <span class="string">"name"</span>:</div><div class="line">                result = self.__cursor.execute(sql, [name, h_id])</div><div class="line">            <span class="comment"># 修改年龄</span></div><div class="line">            <span class="keyword">elif</span> option == <span class="string">"age"</span>:</div><div class="line">                result = self.__cursor.execute(sql, [age, h_id])</div><div class="line">            <span class="comment"># 修改性别</span></div><div class="line">            <span class="keyword">elif</span> option == <span class="string">"gender"</span>:</div><div class="line">                result = self.__cursor.execute(sql, [gender, h_id])</div><div class="line">            <span class="comment"># 修改国家</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                result = self.__cursor.execute(sql, [state, h_id])</div><div class="line">            <span class="keyword">if</span> result == <span class="number">1</span>:</div><div class="line">                self.__conn.commit()</div><div class="line">                <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">        <span class="keyword">except</span> Exception, e:</div><div class="line">            <span class="keyword">print</span> <span class="string">"修改出错，错误代码为："</span>, e</div><div class="line">            <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">        <span class="keyword">finally</span>:</div><div class="line">            self.__close()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">select</span><span class="params">(self, h_id = <span class="number">0</span>)</span>:</span></div><div class="line">        <span class="string">"""查询"""</span></div><div class="line">        self.__open()</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            <span class="comment"># 判断查询的内容</span></div><div class="line">            <span class="keyword">if</span> h_id:</div><div class="line">                sql = <span class="string">"SELECT * FROM t_hero WHERE id = %s"</span></div><div class="line">                self.__cursor.execute(sql, [h_id])</div><div class="line">                result = self.__cursor.fetchall()</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                sql = <span class="string">"SELECT * FROM t_hero"</span></div><div class="line">                self.__cursor.execute(sql)</div><div class="line">                result = self.__cursor.fetchall()</div><div class="line">            <span class="comment"># 判断是否查询到</span></div><div class="line">            <span class="keyword">if</span> len(result) &gt; <span class="number">0</span>:</div><div class="line">                <span class="keyword">return</span> result</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">        <span class="keyword">except</span> Exception, e:</div><div class="line">            <span class="keyword">print</span> e</div><div class="line">            <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">        <span class="keyword">finally</span>:</div><div class="line">            self.__close()</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>启动</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># coding:utf-8</span></div><div class="line"></div><div class="line"><span class="keyword">from</span> MySQL_3kingdoms <span class="keyword">import</span> ThreeKingDoms</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 创建user对象</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    user = ThreeKingDoms(<span class="string">"localhost"</span>, <span class="number">3306</span>, <span class="string">"root"</span>, <span class="string">"mysql"</span>, <span class="string">"db_sanguo"</span>)</div><div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        op_num = raw_input(<span class="string">"请输入想要执行的操作：1.添加  2.删除  "</span></div><div class="line">                               <span class="string">"3.修改  4.查询  5.显示所有英雄  6.退出"</span>)</div><div class="line">        <span class="comment"># 增</span></div><div class="line">        <span class="keyword">if</span> op_num == <span class="string">"1"</span>:</div><div class="line">            name = raw_input(<span class="string">"请输入英雄的姓名"</span>)</div><div class="line">            age = raw_input(<span class="string">"请输入英雄的年龄"</span>)</div><div class="line">            gender = raw_input(<span class="string">"请输入英雄的性别"</span>)</div><div class="line">            state = raw_input(<span class="string">"请输入英雄的国家"</span>)</div><div class="line">            <span class="comment"># 判断是否添加成功</span></div><div class="line">            <span class="keyword">if</span> user.insert(name, age, gender, state):</div><div class="line">                <span class="keyword">print</span> <span class="string">"[SUCCEED] 添加成功！"</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                <span class="keyword">print</span> <span class="string">"[FAILED] 添加失败！"</span></div><div class="line">        <span class="comment"># 删</span></div><div class="line">        <span class="keyword">elif</span> op_num == <span class="string">"2"</span>:</div><div class="line">            h_id = raw_input(<span class="string">"请输入想要删除的英雄编号："</span>)</div><div class="line">            <span class="keyword">if</span> user.delete(h_id):</div><div class="line">                <span class="keyword">print</span> <span class="string">"[SUCCEED] 删除成功！"</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                <span class="keyword">print</span> <span class="string">"[FAILED] 删除失败！"</span></div><div class="line">        <span class="comment"># 改</span></div><div class="line">        <span class="keyword">elif</span> op_num == <span class="string">"3"</span>:</div><div class="line">            h_id = raw_input(<span class="string">"请输入想要修改的英雄编号："</span>)</div><div class="line">            <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">                update_num = raw_input(<span class="string">"请输入想要修改的信息：1.姓名 2.年龄 3.性别 4.国家"</span>)</div><div class="line">                <span class="keyword">if</span> update_num == <span class="string">"1"</span>:</div><div class="line">                    option = <span class="string">"name"</span></div><div class="line">                    name1 = raw_input(<span class="string">"请输入姓名："</span>)</div><div class="line">                    <span class="keyword">if</span> user.update(h_id, option, name=name1):</div><div class="line">                        <span class="keyword">print</span> <span class="string">"[SUCCEED] 修改成功！"</span></div><div class="line">                    <span class="keyword">else</span>:</div><div class="line">                        <span class="keyword">print</span> <span class="string">"[FAILED] 修改失败！"</span></div><div class="line">                    <span class="keyword">break</span></div><div class="line">                <span class="keyword">elif</span> update_num == <span class="string">"2"</span>:</div><div class="line">                    option = <span class="string">"age"</span></div><div class="line">                    age1 = raw_input(<span class="string">"请输入年龄："</span>)</div><div class="line">                    <span class="keyword">if</span> user.update(h_id, option, age=age1):</div><div class="line">                        <span class="keyword">print</span> <span class="string">"[SUCCEED] 修改成功！"</span></div><div class="line">                    <span class="keyword">else</span>:</div><div class="line">                        <span class="keyword">print</span> <span class="string">"[FAILED] 修改失败！"</span></div><div class="line">                    <span class="keyword">break</span></div><div class="line">                <span class="keyword">elif</span> update_num == <span class="string">"3"</span>:</div><div class="line">                    option = <span class="string">"gender"</span></div><div class="line">                    gender1 = raw_input(<span class="string">"请输入性别："</span>)</div><div class="line">                    <span class="keyword">if</span> user.update(h_id, option, gender=gender1):</div><div class="line">                        <span class="keyword">print</span> <span class="string">"[SUCCEED] 修改成功！"</span></div><div class="line">                    <span class="keyword">else</span>:</div><div class="line">                        <span class="keyword">print</span> <span class="string">"[FAILED] 修改失败！"</span></div><div class="line">                    <span class="keyword">break</span></div><div class="line">                <span class="keyword">elif</span> update_num == <span class="string">"4"</span>:</div><div class="line">                    option = <span class="string">"state"</span></div><div class="line">                    state1 = raw_input(<span class="string">"请输入姓名："</span>)</div><div class="line">                    <span class="keyword">if</span> user.update(h_id, option, state=state1):</div><div class="line">                        <span class="keyword">print</span> <span class="string">"[SUCCEED] 修改成功！"</span></div><div class="line">                    <span class="keyword">else</span>:</div><div class="line">                        <span class="keyword">print</span> <span class="string">"[FAILED] 修改失败！"</span></div><div class="line">                    <span class="keyword">break</span></div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                    <span class="keyword">print</span> <span class="string">"输入错误，请重新选择！"</span></div><div class="line">        <span class="comment"># 查</span></div><div class="line">        <span class="keyword">elif</span> op_num == <span class="string">"4"</span>:</div><div class="line">            h_id = raw_input(<span class="string">"请选择想要查看的英雄编号"</span></div><div class="line">                   <span class="string">"(输入0或不输入任何信息 查询全部英雄信息)："</span>)</div><div class="line">            result = user.select(h_id)</div><div class="line">            <span class="keyword">if</span> result:</div><div class="line">                <span class="keyword">for</span> item <span class="keyword">in</span> result:</div><div class="line">                    <span class="keyword">print</span> item[<span class="number">0</span>], item[<span class="number">1</span>], item[<span class="number">2</span>], item[<span class="number">3</span>]</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                <span class="keyword">print</span> <span class="string">"[FAILED] 查询失败！"</span></div><div class="line">        <span class="keyword">elif</span> op_num == <span class="string">"5"</span>:</div><div class="line">            <span class="keyword">for</span> item <span class="keyword">in</span> user.select(<span class="number">0</span>):</div><div class="line">                <span class="keyword">print</span> item[<span class="number">0</span>], item[<span class="number">1</span>], item[<span class="number">2</span>], item[<span class="number">3</span>]</div><div class="line">        <span class="keyword">elif</span> op_num == <span class="string">"6"</span>:</div><div class="line">            <span class="keyword">break</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">print</span> <span class="string">"输入有误，请重新输入！"</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div><div class="line">    main()</div></pre></td></tr></table></figure>
+</li>
+</ul>
+
       
     </div>
 
@@ -318,6 +407,14 @@
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
       
 
       
@@ -383,8 +480,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -412,7 +518,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -437,6 +543,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、MySQL模块安装与导入"><span class="nav-number">1.</span> <span class="nav-text">一、MySQL模块安装与导入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、connect对象"><span class="nav-number">2.</span> <span class="nav-text">二、connect对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、cursor对象"><span class="nav-number">3.</span> <span class="nav-text">三、cursor对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、代码实现"><span class="nav-number">4.</span> <span class="nav-text">四、代码实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -463,7 +585,7 @@
 
 
 <div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  Powered By Oasis
 </div>
 
 <div class="theme-info">
