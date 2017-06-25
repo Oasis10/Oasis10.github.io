@@ -45,7 +45,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="python,Scrapy," />
 
 
 
@@ -61,12 +61,42 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Oasis's Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="一、网站构成分析
+网站主页为 www.zimuzu.tv，截图如下：
+点击【影视库】选项卡：由截图可见，网站内将视频资源分为了电影、美剧等8大类，而第一个选项卡为全部，所以可以从【全部】选项卡入手。同时每部影片标题前，已标出分类。而页面底部则为普通的分页设计，故可通过翻页按钮逐页访问即可，同时再次验证视频标题前为分类信息。
+
+二、创建Xpath、re规则
+通过Chrom浏览器检查，每个视频文件的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrapy爬取人人影视官网(zimuzu.tv)">
+<meta property="og:url" content="http://yoursite.com/2017/06/25/Scrapy爬取人人影视(zimuzu)/index.html">
 <meta property="og:site_name" content="Oasis's Blog">
+<meta property="og:description" content="一、网站构成分析
+网站主页为 www.zimuzu.tv，截图如下：
+点击【影视库】选项卡：由截图可见，网站内将视频资源分为了电影、美剧等8大类，而第一个选项卡为全部，所以可以从【全部】选项卡入手。同时每部影片标题前，已标出分类。而页面底部则为普通的分页设计，故可通过翻页按钮逐页访问即可，同时再次验证视频标题前为分类信息。
+
+二、创建Xpath、re规则
+通过Chrom浏览器检查，每个视频文件的">
+<meta property="og:image" content="http://opfgqseiq.bkt.clouddn.com/17-6-25/26824869.jpg">
+<meta property="og:image" content="http://opfgqseiq.bkt.clouddn.com/17-6-25/75127771.jpg">
+<meta property="og:image" content="http://opfgqseiq.bkt.clouddn.com/17-6-25/77599639.jpg">
+<meta property="og:image" content="http://opfgqseiq.bkt.clouddn.com/17-6-25/16844671.jpg">
+<meta property="og:image" content="http://opfgqseiq.bkt.clouddn.com/17-6-25/22476675.jpg">
+<meta property="og:image" content="http://opfgqseiq.bkt.clouddn.com/17-6-25/19165517.jpg">
+<meta property="og:image" content="http://opfgqseiq.bkt.clouddn.com/17-6-25/40408.jpg">
+<meta property="og:image" content="http://opfgqseiq.bkt.clouddn.com/17-6-25/51782204.jpg">
+<meta property="og:image" content="http://opfgqseiq.bkt.clouddn.com/17-6-25/60695077.jpg">
+<meta property="og:image" content="http://opfgqseiq.bkt.clouddn.com/17-6-25/17239572.jpg">
+<meta property="og:updated_time" content="2017-06-25T12:55:52.195Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Oasis's Blog">
+<meta name="twitter:title" content="Scrapy爬取人人影视官网(zimuzu.tv)">
+<meta name="twitter:description" content="一、网站构成分析
+网站主页为 www.zimuzu.tv，截图如下：
+点击【影视库】选项卡：由截图可见，网站内将视频资源分为了电影、美剧等8大类，而第一个选项卡为全部，所以可以从【全部】选项卡入手。同时每部影片标题前，已标出分类。而页面底部则为普通的分页设计，故可通过翻页按钮逐页访问即可，同时再次验证视频标题前为分类信息。
+
+二、创建Xpath、re规则
+通过Chrom浏览器检查，每个视频文件的">
+<meta name="twitter:image" content="http://opfgqseiq.bkt.clouddn.com/17-6-25/26824869.jpg">
 
 
 
@@ -94,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/25/Scrapy爬取人人影视(zimuzu)/"/>
 
 
 
 
 
-  <title> Oasis's Blog </title>
+  <title> Scrapy爬取人人影视官网(zimuzu.tv) | Oasis's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -125,9 +155,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -210,9 +238,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -242,10 +270,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2017/06/25/Scrapy爬取人人影视(zimuzu)/" itemprop="url">
-                  Scrapy爬取人人影视官网(zimuzu.tv)
-                </a>
+                Scrapy爬取人人影视官网(zimuzu.tv)
               
             
           </h1>
@@ -307,9 +332,7 @@
       
 
       
-        
-          
-            <hr>
+        <hr>
 <h2 id="一、网站构成分析"><a href="#一、网站构成分析" class="headerlink" title="一、网站构成分析"></a>一、网站构成分析</h2><ul>
 <li>网站主页为 www.zimuzu.tv，截图如下：<br><img src="http://opfgqseiq.bkt.clouddn.com/17-6-25/26824869.jpg" alt=""></li>
 <li>点击【影视库】选项卡：<br><img src="http://opfgqseiq.bkt.clouddn.com/17-6-25/75127771.jpg" alt=""><br>由截图可见，网站内将视频资源分为了电影、美剧等8大类，而第一个选项卡为全部，所以可以从【全部】选项卡入手。同时每部影片标题前，已标出分类。<br><img src="http://opfgqseiq.bkt.clouddn.com/17-6-25/77599639.jpg" alt=""><br>而页面底部则为普通的分页设计，故可通过翻页按钮逐页访问即可，同时再次验证视频标题前为分类信息。</li>
@@ -364,751 +387,74 @@
 <p>json</p>
 <p><img src="http://opfgqseiq.bkt.clouddn.com/17-6-25/17239572.jpg" alt=""></p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <div>
+      
+        
+
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/16/Python-MySQL简单交互实例/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Oasis">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Oasis's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/16/Python-MySQL简单交互实例/" itemprop="url">
-                  Python-MySQL简单交互实例
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-16T14:17:21+08:00">
-                2017-05-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/python/" rel="tag"># python</a>
           
-            
+            <a href="/tags/Scrapy/" rel="tag"># Scrapy</a>
           
-
-          
-          
-             <span id="/2017/05/16/Python-MySQL简单交互实例/" class="leancloud_visitors" data-flag-title="Python-MySQL简单交互实例">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
         
-          <hr>
-<h2 id="一、MySQL模块安装与导入"><a href="#一、MySQL模块安装与导入" class="headerlink" title="一、MySQL模块安装与导入"></a>一、MySQL模块安装与导入</h2><ul>
-<li>python2安装<blockquote>
-<p>sudo pip install mysql-python</p>
-</blockquote>
-</li>
-<li><p>python3安装</p>
-<blockquote>
-<p>sudo pip3 install pymysql</p>
-</blockquote>
-<p><em>以下编译环境均为python2</em></p>
-</li>
-</ul>
-<ul>
-<li>导入<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> MySQLdb</div></pre></td></tr></table></figure>
-</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/05/16/Python-MySQL简单交互实例/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/16/Python-MySQL简单交互实例/" rel="next" title="Python-MySQL简单交互实例">
+                <i class="fa fa-chevron-left"></i> Python-MySQL简单交互实例
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
 
-    <div>
-      
-    </div>
+          <span class="post-nav-divider"></span>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/11/Python搭建简单静态web服务器/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Oasis">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Oasis's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+          <div class="post-nav-prev post-nav-item">
             
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/11/Python搭建简单静态web服务器/" itemprop="url">
-                  Python搭建简单静态web服务器
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-11T17:07:05+08:00">
-                2017-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/05/11/Python搭建简单静态web服务器/" class="leancloud_visitors" data-flag-title="Python搭建简单静态web服务器">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <hr>
-<h2 id="1-思路分析"><a href="#1-思路分析" class="headerlink" title="1. 思路分析"></a>1. 思路分析</h2><p>&emsp;&emsp;搭建简单静态服务器，核心思想即按照HTTP协议，服务器获取客户端（浏览器）发送的HTTP报文，通过解析Request Headers（请求头）信息，返回Response（响应头+响应体）信息。一般的Request Header信息（以百度为例）格式如下：<br>&emsp;&emsp;<code>GET / HTTP/1.1</code><br>&emsp;&emsp;<code>Host: www.baidu.com</code><br>&emsp;&emsp;<code>Connection: keep-alive</code><br>&emsp;&emsp;<code>...</code></p>
-<p>&emsp;&emsp;Response Header信息格式如下：<br>&emsp;&emsp;<code>HTTP/1.1 200 OK</code><br>&emsp;&emsp;<code>Server: bfe/1.0.8.18</code><br>&emsp;&emsp;<code>Date: Mon, 08 May 2017 09:35:12 GMT</code><br>&emsp;&emsp;<code>Content-Type: text/html; charset=utf-8</code><br>&emsp;&emsp;<code>...</code><br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/05/11/Python搭建简单静态web服务器/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/08/CSS-margin-top-clear-float/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Oasis">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Oasis's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/08/CSS-margin-top-clear-float/" itemprop="url">
-                  CSS中的margin-top塌陷和清除浮动
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-08T09:28:54+08:00">
-                2017-05-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/05/08/CSS-margin-top-clear-float/" class="leancloud_visitors" data-flag-title="CSS中的margin-top塌陷和清除浮动">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <hr>
-<h2 id="1、margin-top塌陷"><a href="#1、margin-top塌陷" class="headerlink" title="1、margin-top塌陷"></a>1、margin-top塌陷</h2><h4 id="何为margin-top塌陷？"><a href="#何为margin-top塌陷？" class="headerlink" title="何为margin-top塌陷？"></a>何为margin-top塌陷？</h4><p>即两个嵌套的盒容器，内部盒子margin-top加到了外部容器上，从而导致内部盒子的margin-top失败。</p>
-<ul>
-<li>定义两个嵌套盒容器：<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></div><div class="line">        .box1&#123;</div><div class="line">            width: 300px;</div><div class="line">            height: 300px;</div><div class="line">            background-color: #777;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        .box2&#123;</div><div class="line">            width: 200px;</div><div class="line">            height: 200px;</div><div class="line">            /* 内部盒子定义margin-top */</div><div class="line">            margin-top: 100px;</div><div class="line">            background-color: #f80;</div><div class="line">        &#125;</div><div class="line">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box1"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box2"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/05/08/CSS-margin-top-clear-float/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/12/MySQL简单查询实例/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Oasis">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Oasis's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/12/MySQL简单查询实例/" itemprop="url">
-                  MySQL查询实例
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-12T21:44:28+08:00">
-                2016-01-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/01/12/MySQL简单查询实例/" class="leancloud_visitors" data-flag-title="MySQL查询实例">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <hr>
-<h2 id="MySQL查询实例"><a href="#MySQL查询实例" class="headerlink" title="MySQL查询实例"></a>MySQL查询实例</h2><h4 id="首先创建一个数据库"><a href="#首先创建一个数据库" class="headerlink" title="首先创建一个数据库"></a><strong>首先创建一个数据库</strong></h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">database</span> db_student <span class="keyword">charset</span> utf8</div></pre></td></tr></table></figure>
-<h4 id="1-创建t-student和t-score表"><a href="#1-创建t-student和t-score表" class="headerlink" title="1. 创建t_student和t_score表"></a><strong>1. 创建t_student和t_score表</strong></h4><p>t_student<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span>  <span class="keyword">TABLE</span>  t_student (</div><div class="line">    <span class="keyword">id</span>  <span class="built_in">int</span> <span class="keyword">unsigned</span>  <span class="keyword">NOT</span> <span class="literal">NULL</span>  <span class="keyword">UNIQUE</span>  PRIMARY <span class="keyword">KEY</span>,    # 学号</div><div class="line">    <span class="keyword">name</span>  <span class="built_in">VARCHAR</span>(<span class="number">20</span>)  <span class="keyword">NOT</span> <span class="literal">NULL</span>,                        # 姓名</div><div class="line">    gender  <span class="built_in">VARCHAR</span>(<span class="number">10</span>)  ,                              # 性别</div><div class="line">    birth <span class="keyword">YEAR</span>,                                         # 出生年份</div><div class="line">    department  <span class="built_in">VARCHAR</span>(<span class="number">20</span>) ,                           # 院系</div><div class="line">    address  <span class="built_in">VARCHAR</span>(<span class="number">50</span>)                                # 家庭住址</div><div class="line">);</div></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/01/12/MySQL简单查询实例/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/04/Markdown-简明语法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Oasis">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Oasis's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/04/Markdown-简明语法/" itemprop="url">
-                  Markdown简明语法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-04T18:34:33+08:00">
-                2016-01-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/01/04/Markdown-简明语法/" class="leancloud_visitors" data-flag-title="Markdown简明语法">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <hr>
-<h3 id="1-粗体和斜体"><a href="#1-粗体和斜体" class="headerlink" title="1. 粗体和斜体"></a>1. 粗体和斜体</h3><p>使用 * 和 *<em> 表示斜体和粗体。<br>示例：
-</em>斜体<em>    `</em>斜体<em><code>**粗体**</code><em>*粗体</em></em>` </p>
-<h3 id="2-分级标题"><a href="#2-分级标题" class="headerlink" title="2. 分级标题"></a>2. 分级标题</h3><p>在文本前加#即表示标题，共六级，字号依次减小<br>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#一级标题</div><div class="line">##二级标题</div><div class="line">###三级标题</div><div class="line">####四级标题</div><div class="line">#####五级标题</div><div class="line">######六级标题</div></pre></td></tr></table></figure></p>
-<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/01/04/Markdown-简明语法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
@@ -1116,6 +462,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -1135,8 +485,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -1189,6 +548,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、网站构成分析"><span class="nav-number">1.</span> <span class="nav-text">一、网站构成分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、创建Xpath、re规则"><span class="nav-number">2.</span> <span class="nav-text">二、创建Xpath、re规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、登录部分"><span class="nav-number">3.</span> <span class="nav-text">三、登录部分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、代码设计及实现"><span class="nav-number">4.</span> <span class="nav-text">四、代码设计及实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、运行结果"><span class="nav-number">5.</span> <span class="nav-text">五、运行结果</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1303,6 +678,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 
