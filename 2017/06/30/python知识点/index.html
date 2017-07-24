@@ -69,7 +69,7 @@
 <meta property="og:site_name" content="Oasis's Blog">
 <meta property="og:description" content="请至少用一种方法下面字符串的反转？
 1234567891011121314151617A=&apos;abcdefg&apos;# 第一种A[::-1]# 第二种def rev():    t = list(A)    l = len(t)    for i, j in zip(range(l - 1, 0, -1), range(l // 2)):        t[i], t[j] = t[j], t[i]">
-<meta property="og:updated_time" content="2017-07-24T12:22:47.796Z">
+<meta property="og:updated_time" content="2017-07-24T12:24:22.199Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python知识点">
 <meta name="twitter:description" content="请至少用一种方法下面字符串的反转？
@@ -357,7 +357,7 @@
 <blockquote>
 <p>单例模式的要点有三个；一是某个类只能有一个实例；二是它必须自行创建这个实例；三是它必须自行向整个系统提供这个实例。</p>
 </blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">    __instance=<span class="keyword">None</span></div><div class="line">    def__init__(self):</div><div class="line">        <span class="keyword">pass</span></div><div class="line"></div><div class="line">    def__new__(cls,*args,**kwd):</div><div class="line">        <span class="keyword">if</span> Singleton.__instance <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            Singleton.__instance=object.__new__(cls,*args,**kwargs)</div><div class="line">        <span class="keyword">return</span> Singleton.__instance</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">    __instance=<span class="keyword">None</span></div><div class="line">    def__init__(self):</div><div class="line">        <span class="keyword">pass</span></div><div class="line"></div><div class="line">    def__new__(cls, *args, **kwargs):</div><div class="line">        <span class="keyword">if</span> Singleton.__instance <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            Singleton.__instance=object.__new__(cls, *args, **kwargs)</div><div class="line">        <span class="keyword">return</span> Singleton.__instance</div></pre></td></tr></table></figure>
 </li>
 <li><p>请简述 你对左连接，右连接以及内连接的理解？</p>
 <blockquote>
