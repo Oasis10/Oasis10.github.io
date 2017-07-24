@@ -69,7 +69,7 @@
 <meta property="og:site_name" content="Oasis's Blog">
 <meta property="og:description" content="请至少用一种方法下面字符串的反转？
 1234567891011121314151617A=&apos;abcdefg&apos;# 第一种A[::-1]# 第二种def rev():    t = list(A)    l = len(t)    for i, j in zip(range(l - 1, 0, -1), range(l // 2)):        t[i], t[j] = t[j], t[i]">
-<meta property="og:updated_time" content="2017-07-24T12:17:00.215Z">
+<meta property="og:updated_time" content="2017-07-24T12:18:25.454Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python知识点">
 <meta name="twitter:description" content="请至少用一种方法下面字符串的反转？
@@ -357,7 +357,25 @@
 <blockquote>
 <p>单例模式的要点有三个；一是某个类只能有一个实例；二是它必须自行创建这个实例；三是它必须自行向整个系统提供这个实例。</p>
 </blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">    class Singleton(object):</div><div class="line">    	__instance=None</div><div class="line">    	def__init__(self):</div><div class="line">    		pass</div><div class="line">    	def__new__(cls,*args,**kwd):</div><div class="line">    		if Singleton.__instance is None:</div><div class="line">    			Singleton.__instance=object.__new__(cls,*args,**kwd)</div><div class="line">    		return Singleton.__instance</div><div class="line">    ```    </div><div class="line"></div><div class="line">10.	请简述 你对左连接，右连接以及内连接的理解？</div><div class="line">    &gt;left join(左联接) 返回包括左表中的所有记录和右表中联结字段相等的记录</div><div class="line"></div><div class="line">    &gt;right join(右联接) 返回包括右表中的所有记录和左表中联结字段相等的记录</div><div class="line">    </div><div class="line">    &gt;inner join(等值连接)只返回两个表中联结字段相等的行</div><div class="line"></div><div class="line">11.	简述防御csrf攻击的常用方法？</div><div class="line">    &gt;启用中间件</div><div class="line"></div><div class="line">    &gt;post请求</div><div class="line">    </div><div class="line">	&gt;验证码</div><div class="line">	</div><div class="line">	&gt;表单中添加csrf_token标签</div><div class="line"></div><div class="line">12.	请手写一个匹配ip的正则表达式</div><div class="line">	```python</div><div class="line">	^(?:(?:1[0-9][0-9]\.)|(?:2[0-4][0-9]\.)|(?:25[0-5]\.)|(?:[1-9][0-9]\.)|(?:[0-9]\.))&#123;3&#125;(?:(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5])|(?:[1-9][0-9])|(?:[0-9]))$</div><div class="line"></div><div class="line">	^([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])$'</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span><span class="params">(object)</span>:</span></div><div class="line">	__instance=<span class="keyword">None</span></div><div class="line">	def__init__(self):</div><div class="line">		<span class="keyword">pass</span></div><div class="line">	def__new__(cls,*args,**kwd):</div><div class="line">		<span class="keyword">if</span> Singleton.__instance <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">			Singleton.__instance=object.__new__(cls,*args,**kwd)</div><div class="line">		<span class="keyword">return</span> Singleton.__instance</div></pre></td></tr></table></figure>
+</li>
+<li><p>请简述 你对左连接，右连接以及内连接的理解？</p>
+<blockquote>
+<p>left join(左联接) 返回包括左表中的所有记录和右表中联结字段相等的记录</p>
+<p>right join(右联接) 返回包括右表中的所有记录和左表中联结字段相等的记录</p>
+<p>inner join(等值连接)只返回两个表中联结字段相等的行</p>
+</blockquote>
+</li>
+<li><p>简述防御csrf攻击的常用方法？</p>
+<blockquote>
+<p>启用中间件</p>
+<p>post请求</p>
+<p>验证码</p>
+<p>表单中添加csrf_token标签</p>
+</blockquote>
+</li>
+<li><p>请手写一个匹配ip的正则表达式</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">^(?:(?:1[0-9][0-9]\.)|(?:2[0-4][0-9]\.)|(?:25[0-5]\.)|(?:[1-9][0-9]\.)|(?:[0-9]\.))&#123;3&#125;(?:(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5])|(?:[1-9][0-9])|(?:[0-9]))$</div><div class="line"></div><div class="line">^([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])$'</div></pre></td></tr></table></figure>
 </li>
 <li><p>进程间通信（IPC）有那些方式？</p>
 <blockquote>
