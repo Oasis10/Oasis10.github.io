@@ -69,7 +69,7 @@
 <meta property="og:site_name" content="Oasis's Blog">
 <meta property="og:description" content="问题最近使用tornado遇见一个问题，就是耗时操作的处理问题，无意中搜索到一个futures库，可以解决这个问题
 安装futures库在python3中已经内置，python2则需要安装pip install futures">
-<meta property="og:updated_time" content="2017-10-08T02:10:53.423Z">
+<meta property="og:updated_time" content="2017-10-08T02:15:49.539Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tornado异步笔记(一)">
 <meta name="twitter:description" content="问题最近使用tornado遇见一个问题，就是耗时操作的处理问题，无意中搜索到一个futures库，可以解决这个问题
@@ -315,9 +315,15 @@
 <a id="more"></a>
 <h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p><a href="https://docs.python.org/3.6/library/concurrent.futures.html?highlight=concurrent%20futures#module-concurrent.futures" target="_blank" rel="external">concurrent.futures官方文档-链接</a><br>用法和multiprocessing大同小异，不同之处是futures会将任务放到Future()对象容器中执行，此对象有cancel()、result()、done()方法等</p>
 <ul>
-<li><p>执行对象<br><strong>concurret.futures</strong>库提供了一个抽象父类<strong>Executor</strong>，它无法直接使用，应该使用其的两个子类<strong>ThreadPool</strong>(线程池)和<strong>ProcessPool</strong>(进程池)</p>
+<li><p>执行对象</p>
+<blockquote>
+<p><strong>concurret.futures</strong>库提供了一个抽象父类<strong>Executor</strong>，它无法直接使用，应该使用其的两个子类<strong>ThreadPool</strong>(线程池)和<strong>ProcessPool</strong>(进程池)</p>
+</blockquote>
 </li>
-<li><p>具体用法<br>ThreadPool和ProcessPool两个类所提供的接口基本一致，执行具体任务可通过<strong>Executor.submit(fn, *args, </strong>kwargs)<strong>、</strong>Executor.map(func, <em>iterables, timeout=None)*</em>两个方法执行。map()用法类似于python内建的map()。<br>以下对两个类及两种方法的用法各举一例：</p>
+<li><p>具体用法</p>
+<blockquote>
+<p>ThreadPool和ProcessPool两个类所提供的接口基本一致，执行具体任务可通过<code>Executor.submit(fn,*args,**kwargs)</code><br><code>Executor.map(func,*iterables, timeout=None)</code><br>两个方法执行。map()用法类似于python内建的map()。<br>以下对两个类及两种方法的用法各举一例：</p>
+</blockquote>
 </li>
 </ul>
 <p><strong>ThreadPool-map():</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> ThreadPoolExecutor, ProcessPoolExecutor</div><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">import</span> time</div><div class="line">start = time.time()</div><div class="line"></div><div class="line"></div><div class="line">URLS = [<span class="string">'http://hupu.com'</span>, <span class="string">'http://sohu.com/'</span>, <span class="string">'https://api.github.com/'</span>]</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_url</span><span class="params">(url)</span>:</span></div><div class="line">    <span class="keyword">return</span> len(requests.get(url).content)</div><div class="line"></div><div class="line"><span class="keyword">with</span> ThreadPoolExecutor(max_workers=<span class="number">10</span>) <span class="keyword">as</span> executor:</div><div class="line">    <span class="keyword">for</span> url, data <span class="keyword">in</span> zip(URLS, executor.map(load_url, URLS)):</div><div class="line">        print(<span class="string">'%r page is %d bytes'</span> % (url, data))</div><div class="line"><span class="keyword">print</span> <span class="string">'master process end...'</span></div><div class="line"><span class="keyword">print</span> <span class="string">'total time:%ss'</span> % (time.time() - start)</div></pre></td></tr></table></figure></p>
