@@ -45,7 +45,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="concurrent.futures,tornado," />
+  <meta name="keywords" content="Celery," />
 
 
 
@@ -61,19 +61,26 @@
 
 
 
-<meta name="description" content="问题最近使用tornado遇见一个问题，就是耗时操作的处理问题，无意中搜索到一个futures库，可以解决这个问题
-安装futures库在python3中已经内置，python2则需要安装pip install futures">
+<meta name="description" content="Celery简介Celery的官方文档部分翻译版
+
+何为Celery？根据官方文档的说明，Celery被称作分布式任务队列，通俗的说就是异步任务调度处理。需要注意的是，Celery只处理任务，本身并没有集成消息队列，所以需要使用下面提到的broker来充当这个中间人的角色。Celery由三部分组成，分别是消息中间件（message broker），任务执行单元（worker）和任务执行结果存储（">
 <meta property="og:type" content="article">
-<meta property="og:title" content="tornado异步笔记(一)">
-<meta property="og:url" content="http://yoursite.com/2017/07/08/tornado异步笔记-一/index.html">
+<meta property="og:title" content="Celery学习笔记(一)">
+<meta property="og:url" content="http://yoursite.com/2017/10/08/tornado异步笔记-三/index.html">
 <meta property="og:site_name" content="Oasis's Blog">
-<meta property="og:description" content="问题最近使用tornado遇见一个问题，就是耗时操作的处理问题，无意中搜索到一个futures库，可以解决这个问题
-安装futures库在python3中已经内置，python2则需要安装pip install futures">
-<meta property="og:updated_time" content="2017-10-09T05:53:59.109Z">
+<meta property="og:description" content="Celery简介Celery的官方文档部分翻译版
+
+何为Celery？根据官方文档的说明，Celery被称作分布式任务队列，通俗的说就是异步任务调度处理。需要注意的是，Celery只处理任务，本身并没有集成消息队列，所以需要使用下面提到的broker来充当这个中间人的角色。Celery由三部分组成，分别是消息中间件（message broker），任务执行单元（worker）和任务执行结果存储（">
+<meta property="og:image" content="http://opfgqseiq.bkt.clouddn.com/17-10-9/20262741.jpg">
+<meta property="og:image" content="http://opfgqseiq.bkt.clouddn.com/17-10-9/78011779.jpg">
+<meta property="og:image" content="http://opfgqseiq.bkt.clouddn.com/17-10-9/47794167.jpg">
+<meta property="og:updated_time" content="2017-10-09T06:07:42.245Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tornado异步笔记(一)">
-<meta name="twitter:description" content="问题最近使用tornado遇见一个问题，就是耗时操作的处理问题，无意中搜索到一个futures库，可以解决这个问题
-安装futures库在python3中已经内置，python2则需要安装pip install futures">
+<meta name="twitter:title" content="Celery学习笔记(一)">
+<meta name="twitter:description" content="Celery简介Celery的官方文档部分翻译版
+
+何为Celery？根据官方文档的说明，Celery被称作分布式任务队列，通俗的说就是异步任务调度处理。需要注意的是，Celery只处理任务，本身并没有集成消息队列，所以需要使用下面提到的broker来充当这个中间人的角色。Celery由三部分组成，分别是消息中间件（message broker），任务执行单元（worker）和任务执行结果存储（">
+<meta name="twitter:image" content="http://opfgqseiq.bkt.clouddn.com/17-10-9/20262741.jpg">
 
 
 
@@ -101,13 +108,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/07/08/tornado异步笔记-一/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/08/tornado异步笔记-三/"/>
 
 
 
 
 
-  <title> tornado异步笔记(一) | Oasis's Blog </title>
+  <title> Celery学习笔记(一) | Oasis's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -226,7 +233,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/08/tornado异步笔记-一/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/08/tornado异步笔记-三/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Oasis">
@@ -247,7 +254,7 @@
             
             
               
-                tornado异步笔记(一)
+                Celery学习笔记(一)
               
             
           </h1>
@@ -262,8 +269,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-08T10:07:27+08:00">
-                2017-07-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-08T16:20:52+08:00">
+                2017-10-08
               </time>
             
 
@@ -280,7 +287,7 @@
 
           
           
-             <span id="/2017/07/08/tornado异步笔记-一/" class="leancloud_visitors" data-flag-title="tornado异步笔记(一)">
+             <span id="/2017/10/08/tornado异步笔记-三/" class="leancloud_visitors" data-flag-title="Celery学习笔记(一)">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -310,26 +317,35 @@
 
       
         <hr>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>最近使用tornado遇见一个问题，就是耗时操作的处理问题，无意中搜索到一个<strong>futures</strong>库，可以解决这个问题</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><strong>futures</strong>库在python3中已经内置，python2则需要安装<br><code>pip install futures</code></p>
-<a id="more"></a>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p><a href="https://docs.python.org/3.6/library/concurrent.futures.html?highlight=concurrent%20futures#module-concurrent.futures" target="_blank" rel="external">concurrent.futures官方文档-链接</a><br>用法和multiprocessing大同小异，不同之处是futures会将任务放到Future()对象容器中执行，此对象有cancel()、result()、done()方法等</p>
+<h2 id="Celery简介"><a href="#Celery简介" class="headerlink" title="Celery简介"></a>Celery简介</h2><p><a href="http://docs.celeryproject.org/en/latest/index.html" target="_blank" rel="external">Celery的官方文档</a><br><a href="http://docs.jinkan.org/docs/celery/" target="_blank" rel="external">部分翻译版</a></p>
 <ul>
-<li><p>执行对象</p>
-<blockquote>
-<p><strong>concurret.futures</strong>库提供了一个抽象父类<strong>Executor</strong>，它无法直接使用，应该使用其的两个子类<strong>ThreadPool</strong>(线程池)和<strong>ProcessPool</strong>(进程池)</p>
-</blockquote>
+<li>何为Celery？<br>根据官方文档的说明，Celery被称作分布式任务队列，通俗的说就是异步任务调度处理。需要注意的是，Celery只处理任务，本身并没有集成消息队列，所以需要使用下面提到的broker来充当这个中间人的角色。<br>Celery由三部分组成，分别是消息中间件（message broker），任务执行单元（worker）和任务执行结果存储（task result store/backend）。<br><strong>broker</strong> 是一个消息传输的中间件，可以将它理解为一个email，更具象的话可以将它看成一个消息队列。官方推荐rabbitmq。<br><strong>worker</strong> 和线(进)程池类似，负责执行Celery交付的任务，并发运行在分布式的系统节点。<br><strong>backend</strong> 即任务处理结果存储，官方推荐rabbitmq或redis。</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li>Celery的工作流程<br>下面这张图比较直观：<br><img src="http://opfgqseiq.bkt.clouddn.com/17-10-9/20262741.jpg" alt="Celery工作流程"></li>
+</ul>
+<p>当用户调用celery的异步任务的时候，celery先向broker传递消息，之后celery的worker收到消息后开始执行任务。任务执行完之后，Celery将结果存储到task result store(也就是backend)。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>按照官方文档的说明安装即可, 以Ubuntu为例<br>Celery：<br><code>pip install celery</code></p>
+<p>Rabbitmq：<br><code>sudo apt-get install rabbitmq-server</code></p>
+<p>安装完成后即可开始使用</p>
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><ul>
+<li><p>创建task.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"><span class="keyword">from</span> celery <span class="keyword">import</span> Celery</div><div class="line"></div><div class="line"><span class="comment"># 创建Celery对象，第一个参数为当前模块名；</span></div><div class="line"><span class="comment"># 第二个参数(backend)为设置存储的后端，此处使用了amqp进行存储，同时也可以使用redis</span></div><div class="line"><span class="comment"># 第三个参数(broker)是broker关键字参数，指定所使用的消 息中间人的 URL，此处使用了默认的RabbitMQ</span></div><div class="line">app = Celery(<span class="string">'tasks'</span>, backend=<span class="string">'amqp'</span>, broker=<span class="string">'amqp://guest@localhost//'</span>)</div><div class="line"><span class="comment"># app = Celery('tasks', backend='redis://localhost', broker='amqp://')</span></div><div class="line"></div><div class="line"><span class="meta">@app.task</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(x, y)</span>:</span></div><div class="line">    <span class="keyword">return</span> x + y</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    ret = add.delay(<span class="number">121</span>, <span class="number">222</span>)</div><div class="line">    <span class="keyword">print</span> ret.ready()</div><div class="line">    <span class="keyword">print</span> ret.get()</div><div class="line">    <span class="keyword">print</span> ret.ready()</div><div class="line">    <span class="keyword">print</span> ret.backend</div></pre></td></tr></table></figure>
 </li>
-<li><p>具体用法</p>
-<blockquote>
-<p>ThreadPool和ProcessPool两个类所提供的接口基本一致，执行具体任务可通过<code>Executor.submit(fn,*args,**kwargs)</code><br><code>Executor.map(func,*iterables, timeout=None)</code><br>两个方法执行。map()用法类似于python内建的map()。<br>以下对两个类及两种方法的用法各举一例：</p>
-</blockquote>
+<li><p>运行Celery-Worker服务器<br><code>celery -A tasks worker --loglevel=info</code><br>效果如下：<img src="http://opfgqseiq.bkt.clouddn.com/17-10-9/78011779.jpg" alt="celery server"></p>
+</li>
+<li><p>运行task.py, 结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">False</div><div class="line">343</div><div class="line">True</div><div class="line">343</div><div class="line">&lt;celery.backends.amqp.AMQPBackend object at 0x7eff06edecd0&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>终端：<img src="http://opfgqseiq.bkt.clouddn.com/17-10-9/47794167.jpg" alt="终端显示结果"></p>
 </li>
 </ul>
-<p><strong>ThreadPool-map():</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> ThreadPoolExecutor, ProcessPoolExecutor</div><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">import</span> time</div><div class="line">start = time.time()</div><div class="line"></div><div class="line"></div><div class="line">URLS = [<span class="string">'http://hupu.com'</span>, <span class="string">'http://sohu.com/'</span>, <span class="string">'https://api.github.com/'</span>]</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_url</span><span class="params">(url)</span>:</span></div><div class="line">    <span class="keyword">return</span> len(requests.get(url).content)</div><div class="line"></div><div class="line"><span class="keyword">with</span> ThreadPoolExecutor(max_workers=<span class="number">10</span>) <span class="keyword">as</span> executor:</div><div class="line">    <span class="keyword">for</span> url, data <span class="keyword">in</span> zip(URLS, executor.map(load_url, URLS)):</div><div class="line">        print(<span class="string">'%r page is %d bytes'</span> % (url, data))</div><div class="line"><span class="keyword">print</span> <span class="string">'master process end...'</span></div><div class="line"><span class="keyword">print</span> <span class="string">'total time:%ss'</span> % (time.time() - start)</div></pre></td></tr></table></figure></p>
-<p>运行结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&apos;http://hupu.com&apos; page is 213123 bytes</div><div class="line">&apos;http://sohu.com/&apos; page is 203503 bytes</div><div class="line">&apos;https://api.github.com/&apos; page is 2039 bytes</div><div class="line">master process end...</div><div class="line">total time:1.16334295273s</div></pre></td></tr></table></figure></p>
-<p><strong>ProcessPool-submit():</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> ProcessPoolExecutor</div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="keyword">import</span> requests</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_url</span><span class="params">(url)</span>:</span></div><div class="line">    <span class="keyword">return</span> len(requests.get(url).content)</div><div class="line"></div><div class="line">start = time.time()</div><div class="line"><span class="keyword">with</span> ProcessPoolExecutor(<span class="number">10</span>) <span class="keyword">as</span> executor:</div><div class="line">    future_1 = executor.submit(load_url, <span class="string">'https://github.com'</span>)</div><div class="line">    <span class="keyword">print</span> future_1.result()</div><div class="line">    future_2 = executor.submit(load_url, <span class="string">'https://stackoverflow.com'</span>)</div><div class="line">    <span class="keyword">print</span> future_2.result()</div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">'主进程已结束, 共耗时%s秒'</span> % (time.time() - start)</div></pre></td></tr></table></figure></p>
-<p>运行结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">50640</div><div class="line">249490</div><div class="line">主进程已结束, 共耗时1.92944312096秒</div></pre></td></tr></table></figure></p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>Celery可单独配置某项、多项配置、引用配置文件</p>
+<p>单独配置某项：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.conf.CELERY_TASK_SERIALIZER = <span class="string">'json'</span></div></pre></td></tr></table></figure></p>
+<p>配置多项：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">app.conf.update(</div><div class="line">    CELERY_TASK_SERIALIZER=<span class="string">'json'</span>,</div><div class="line">    CELERY_ACCEPT_CONTENT=[<span class="string">'json'</span>],  <span class="comment"># Ignore other content</span></div><div class="line">    CELERY_RESULT_SERIALIZER=<span class="string">'json'</span>,</div><div class="line">    CELERY_TIMEZONE=<span class="string">'Asia/Shanghai'</span></div><div class="line">)</div></pre></td></tr></table></figure></p>
+<p>引用配置文件：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># celeryconfig.py</span></div><div class="line">BROKER_URL = <span class="string">'amqp://'</span></div><div class="line">CELERY_RESULT_BACKEND = <span class="string">'amqp://'</span></div><div class="line"></div><div class="line">CELERY_TASK_SERIALIZER = <span class="string">'json'</span></div><div class="line">CELERY_RESULT_SERIALIZER = <span class="string">'json'</span></div><div class="line">CELERY_ACCEPT_CONTENT=[<span class="string">'json'</span>]</div><div class="line">CELERY_TIMEZONE = <span class="string">'Asia/Shanghai'</span></div><div class="line"></div><div class="line"><span class="comment"># 使用配置文件需要注意的是，需在同级目录下</span></div><div class="line">app.config_from_object(<span class="string">'celeryconfig'</span>)</div></pre></td></tr></table></figure></p>
+<p><a href="http://docs.celeryproject.org/en/latest/userguide/configuration.html#configuration" target="_blank" rel="external">完整的配置说明</a></p>
 
       
     </div>
@@ -359,9 +375,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/concurrent-futures/" rel="tag"># concurrent.futures</a>
-          
-            <a href="/tags/tornado/" rel="tag"># tornado</a>
+            <a href="/tags/Celery/" rel="tag"># Celery</a>
           
         </div>
       
@@ -374,8 +388,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/30/python知识点/" rel="next" title="Python知识点">
-                <i class="fa fa-chevron-left"></i> Python知识点
+              <a href="/2017/07/08/tornado异步笔记-二/" rel="next" title="tornado异步笔记(二)">
+                <i class="fa fa-chevron-left"></i> tornado异步笔记(二)
               </a>
             
           </div>
@@ -383,10 +397,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/07/08/tornado异步笔记-二/" rel="prev" title="tornado异步笔记(二)">
-                tornado异步笔记(二) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -506,7 +516,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用法"><span class="nav-number">3.</span> <span class="nav-text">用法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Celery简介"><span class="nav-number">1.</span> <span class="nav-text">Celery简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行"><span class="nav-number">3.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">4.</span> <span class="nav-text">配置</span></a></li></ol></div>
             
 
           </div>
