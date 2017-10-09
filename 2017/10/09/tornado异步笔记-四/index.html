@@ -45,7 +45,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Celery,tornado,tornado-celery," />
 
 
 
@@ -61,13 +61,16 @@
 
 
 
+<meta name="description" content="安装tornado-celery之前为了处理耗时任务，已经在tornado中用过了concurrent.futures提供的线程池。同时，tornado也是支持celery的，celery官方文档中给出的集成包就是tornado-celery(官方文档)安装方法：pip install tornado-celery在此处有个坑，就是tornado-celery的版本是0.3.5，最后更新时间是2">
 <meta property="og:type" content="article">
-<meta property="og:title" content="tornado异步笔记(四)">
+<meta property="og:title" content="tornado异步笔记(四) -- 使用Celery">
 <meta property="og:url" content="http://yoursite.com/2017/10/09/tornado异步笔记-四/index.html">
 <meta property="og:site_name" content="Oasis's Blog">
-<meta property="og:updated_time" content="2017-10-09T06:14:27.494Z">
+<meta property="og:description" content="安装tornado-celery之前为了处理耗时任务，已经在tornado中用过了concurrent.futures提供的线程池。同时，tornado也是支持celery的，celery官方文档中给出的集成包就是tornado-celery(官方文档)安装方法：pip install tornado-celery在此处有个坑，就是tornado-celery的版本是0.3.5，最后更新时间是2">
+<meta property="og:updated_time" content="2017-10-09T09:41:22.138Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tornado异步笔记(四)">
+<meta name="twitter:title" content="tornado异步笔记(四) -- 使用Celery">
+<meta name="twitter:description" content="安装tornado-celery之前为了处理耗时任务，已经在tornado中用过了concurrent.futures提供的线程池。同时，tornado也是支持celery的，celery官方文档中给出的集成包就是tornado-celery(官方文档)安装方法：pip install tornado-celery在此处有个坑，就是tornado-celery的版本是0.3.5，最后更新时间是2">
 
 
 
@@ -101,7 +104,7 @@
 
 
 
-  <title> tornado异步笔记(四) | Oasis's Blog </title>
+  <title> tornado异步笔记(四) -- 使用Celery | Oasis's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -241,7 +244,7 @@
             
             
               
-                tornado异步笔记(四)
+                tornado异步笔记(四) -- 使用Celery
               
             
           </h1>
@@ -274,7 +277,7 @@
 
           
           
-             <span id="/2017/10/09/tornado异步笔记-四/" class="leancloud_visitors" data-flag-title="tornado异步笔记(四)">
+             <span id="/2017/10/09/tornado异步笔记-四/" class="leancloud_visitors" data-flag-title="tornado异步笔记(四) -- 使用Celery">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -303,7 +306,17 @@
       
 
       
-        
+        <hr>
+<h2 id="安装tornado-celery"><a href="#安装tornado-celery" class="headerlink" title="安装tornado-celery"></a>安装tornado-celery</h2><p>之前为了处理耗时任务，已经在tornado中用过了concurrent.futures提供的线程池。<br>同时，tornado也是支持celery的，celery官方文档中给出的集成包就是tornado-celery(<a href="https://github.com/mher/tornado-celery/" target="_blank" rel="external">官方文档</a>)<br>安装方法：<br><code>pip install tornado-celery</code><br><strong>在此处有个坑</strong>，就是tornado-celery的版本是0.3.5，最后更新时间是2015年8月，所以不支持celery4.0以上版本，同时也不支持 <strong>pika</strong> (python的一个Rabbitmq客户端库) 0.10以上的版本。<br>所以根据需求，需要从新安装一下这两个包：<br><code>pip install celery==3.1.7</code><br><code>pip install pika==0.9.14</code></p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>tornado-celery的使用和tornado本身的异步使用方式基本相同，即回调异步(callback)和协程异步(yield)<br>以下是官方文档给出的示例：<br>回调方式：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> tornado <span class="keyword">import</span> gen, web</div><div class="line"><span class="keyword">import</span> tcelery, tasks</div><div class="line"></div><div class="line">tcelery.setup_nonblocking_producer()</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">AsyncHandler</span><span class="params">(web.RequestHandler)</span>:</span></div><div class="line"><span class="meta">    @asynchronous</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self)</span>:</span></div><div class="line">        tasks.echo.apply_async(args=[<span class="string">'Hello world!'</span>], callback=self.on_result)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">on_result</span><span class="params">(self, response)</span>:</span></div><div class="line">        self.write(str(response.result))</div><div class="line">        self.finish()</div></pre></td></tr></table></figure></p>
+<p>协程方式：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">GenAsyncHandler</span><span class="params">(web.RequestHandler)</span>:</span></div><div class="line"><span class="meta">    @asynchronous</span></div><div class="line"><span class="meta">    @gen.coroutine</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self)</span>:</span></div><div class="line">        response = <span class="keyword">yield</span> gen.Task(tasks.sleep.apply_async, args=[<span class="number">3</span>])</div><div class="line">        self.write(str(response.result))</div><div class="line">        self.finish()</div></pre></td></tr></table></figure></p>
+<h2 id="实际测试"><a href="#实际测试" class="headerlink" title="实际测试"></a>实际测试</h2><p>还以线程池解决的耗时任务为例：<br>首先创建task.py:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"><span class="comment"># tasks.py</span></div><div class="line"></div><div class="line"><span class="keyword">from</span> celery <span class="keyword">import</span> Celery</div><div class="line"></div><div class="line"><span class="comment"># 因为耗时任务模块是独立存在的，所以需将其添加到include中，也可以通过配置获取</span></div><div class="line">app = Celery(<span class="string">'tasks'</span>, backend=<span class="string">'amqp'</span>, broker=<span class="string">'amqp://guest@localhost//'</span>, include=[<span class="string">'test_function'</span>])</div></pre></td></tr></table></figure></p>
+<p>耗时任务：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="keyword">from</span> tasks <span class="keyword">import</span> app</div><div class="line"></div><div class="line"><span class="meta">@app.task</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">age_judgement</span><span class="params">(age)</span>:</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> isinstance(age ,int):</div><div class="line">        <span class="keyword">raise</span> TypeError(<span class="string">'integer argument expected, got a %s'</span> % type(age))</div><div class="line">    time.sleep(<span class="number">3</span>)</div><div class="line">    <span class="keyword">if</span> age &gt;= <span class="number">18</span>:</div><div class="line">        <span class="keyword">return</span> <span class="string">'Adult'</span></div><div class="line">    <span class="keyword">return</span> <span class="string">'Minor'</span></div></pre></td></tr></table></figure></p>
+<p>使用tornado-celery处理耗时任务的server:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> tornado.web</div><div class="line"><span class="keyword">import</span> tornado.ioloop</div><div class="line"><span class="keyword">import</span> tornado.httpserver</div><div class="line"><span class="keyword">import</span> tornado.gen</div><div class="line"><span class="keyword">import</span> json</div><div class="line"><span class="keyword">import</span> tcelery</div><div class="line"><span class="keyword">from</span> tasks <span class="keyword">import</span> app</div><div class="line"><span class="keyword">import</span> test_function</div><div class="line"><span class="keyword">from</span> tornado.httpclient <span class="keyword">import</span> AsyncHTTPClient</div><div class="line"><span class="keyword">from</span> tornado.options <span class="keyword">import</span> define, options</div><div class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</div><div class="line"></div><div class="line">define(<span class="string">'port'</span>, default=<span class="number">9000</span>, type=int, help=<span class="string">'run server on defined port'</span>)</div><div class="line">tcelery.setup_nonblocking_producer(celery_app=app)</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BaseHandler</span><span class="params">(tornado.web.RequestHandler)</span>:</span></div><div class="line">    <span class="string">"""请求处理类基类"""</span><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">prepare</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">if</span> self.request.method != <span class="string">'POST'</span>:</div><div class="line">            self.send_error(<span class="number">403</span>, content=<span class="string">'403 Forbidden [POST ONLY]'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">write_error</span><span class="params">(self, status_code, **kwargs)</span>:</span></div><div class="line">        self.write(kwargs[<span class="string">'content'</span>])</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">FunctionHandler</span><span class="params">(BaseHandler)</span>:</span></div><div class="line">    <span class="string">"""请求处理类"""</span></div><div class="line"></div><div class="line"><span class="meta">    @tornado.web.asynchronous</span></div><div class="line"><span class="meta">    @tornado.gen.coroutine</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="comment"># 获取json参数</span></div><div class="line">        json_data = self.request.body</div><div class="line">        <span class="keyword">print</span> json_data</div><div class="line">        <span class="comment"># 转为字典</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            data = json.loads(json_data)</div><div class="line">        <span class="keyword">except</span> Exception:</div><div class="line">            <span class="keyword">raise</span> tornado.gen.Return(self.write(dict(errno=<span class="string">'4001'</span>, errmsg = <span class="string">'参数错误,请重试'</span>)))</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            response = <span class="keyword">yield</span> tornado.gen.Task(test_function.age_judgement.apply_async, kwargs=data)</div><div class="line">        <span class="keyword">except</span> ValueError, e:</div><div class="line">            <span class="keyword">print</span> e</div><div class="line">            <span class="keyword">raise</span> tornado.gen.Return(self.write(<span class="string">'error'</span>))</div><div class="line">        <span class="keyword">print</span> response.result</div><div class="line">        self.write(dict(result=response.result))</div><div class="line">        self.finish()</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BaiduHandler</span><span class="params">(BaseHandler)</span>:</span></div><div class="line">    <span class="string">"""百度搜索处理类"""</span></div><div class="line"></div><div class="line"><span class="meta">    @tornado.gen.coroutine</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">"""获取用户发送信息"""</span></div><div class="line">        wd = self.get_argument(<span class="string">'wd'</span>)</div><div class="line">        <span class="keyword">if</span> wd:</div><div class="line">            <span class="comment"># 异步请求客户端</span></div><div class="line">            http_client = AsyncHTTPClient()</div><div class="line">            response = <span class="keyword">yield</span> http_client.fetch(<span class="string">'http://www.baidu.com/s?wd=%s'</span> % wd)</div><div class="line">            html = etree.HTML(response.body)</div><div class="line">            nums = html.xpath(<span class="string">'//div[@class="nums"]/text()'</span>)[<span class="number">0</span>]</div><div class="line">            <span class="keyword">raise</span> tornado.gen.Return(self.write(&#123;<span class="string">'resp'</span>: nums&#125;))</div><div class="line">        <span class="keyword">raise</span> tornado.gen.Return(self.write(&#123;<span class="string">'errmsg'</span>: <span class="string">'请输入正确参数(wd)进行查询'</span>&#125;))</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ErrorHandler</span><span class="params">(tornado.web.RequestHandler)</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">prepare</span><span class="params">(self)</span>:</span></div><div class="line">        self.send_error(<span class="number">403</span>, content=<span class="string">'403 Forbidden [Invalid URL]'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">write_error</span><span class="params">(self, status_code, **kwargs)</span>:</span></div><div class="line">        self.write(kwargs[<span class="string">'content'</span>])</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    options.parse_command_line()</div><div class="line">    app = tornado.web.Application([</div><div class="line">        (<span class="string">r'/api/test'</span>, FunctionHandler),</div><div class="line">        (<span class="string">r'/api/test-baidu'</span>, BaiduHandler),</div><div class="line">        (<span class="string">r'.*'</span>, ErrorHandler),</div><div class="line">    ], debug=<span class="keyword">True</span>)</div><div class="line">    http_server = tornado.httpserver.HTTPServer(app)</div><div class="line">    http_server.listen(options.port)</div><div class="line">    tornado.ioloop.IOLoop.current().start()</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    main()</div></pre></td></tr></table></figure></p>
+<p>发送请求：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">import</span> random</div><div class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> ProcessPoolExecutor</div><div class="line"><span class="keyword">import</span> time</div><div class="line"></div><div class="line"></div><div class="line">start = time.time()</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">req_post</span><span class="params">(age)</span>:</span></div><div class="line">    r = requests.post(<span class="string">'http://127.0.0.1:9000/api/test'</span>, json=&#123;<span class="string">"age"</span>: age&#125;)</div><div class="line">    <span class="keyword">return</span> r.content</div><div class="line">data = range(<span class="number">20</span>)</div><div class="line">random.shuffle(data)</div><div class="line"><span class="keyword">print</span> data</div><div class="line"><span class="keyword">with</span> ProcessPoolExecutor(<span class="number">20</span>) <span class="keyword">as</span> executor:</div><div class="line">    <span class="keyword">for</span> content <span class="keyword">in</span> executor.map(req_post, data):</div><div class="line">        <span class="keyword">print</span> content</div><div class="line"><span class="keyword">print</span> <span class="string">'共耗时%s秒'</span> % (time.time()-start)</div></pre></td></tr></table></figure></p>
+<p>运行celery-worker服务器, 并发20个worker<br><code>celery -A tasks worker -C 20 --loglevel=info</code></p>
+<p>运行结果：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">[<span class="number">6</span>, <span class="number">13</span>, <span class="number">4</span>, <span class="number">19</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">12</span>, <span class="number">8</span>, <span class="number">16</span>, <span class="number">14</span>, <span class="number">10</span>, <span class="number">17</span>, <span class="number">1</span>, <span class="number">18</span>, <span class="number">9</span>, <span class="number">15</span>]</div><div class="line">&#123;<span class="string">"result"</span>: <span class="string">"Minor"</span>&#125;</div><div class="line">&#123;<span class="string">"result"</span>: <span class="string">"Minor"</span>&#125;</div><div class="line">&#123;<span class="string">"result"</span>: <span class="string">"Minor"</span>&#125;</div><div class="line">&#123;<span class="string">"result"</span>: <span class="string">"Adult"</span>&#125;</div><div class="line">&#123;<span class="string">"result"</span>: <span class="string">"Minor"</span>&#125;</div><div class="line">&#123;<span class="string">"result"</span>: <span class="string">"Minor"</span>&#125;</div><div class="line">&#123;<span class="string">"result"</span>: <span class="string">"Minor"</span>&#125;</div><div class="line">&#123;<span class="string">"result"</span>: <span class="string">"Minor"</span>&#125;</div><div class="line">&#123;<span class="string">"result"</span>: <span class="string">"Minor"</span>&#125;</div><div class="line">&#123;<span class="string">"result"</span>: <span class="string">"Minor"</span>&#125;</div><div class="line">&#123;<span class="string">"result"</span>: <span class="string">"Minor"</span>&#125;</div><div class="line">&#123;<span class="string">"result"</span>: <span class="string">"Minor"</span>&#125;</div><div class="line">&#123;<span class="string">"result"</span>: <span class="string">"Minor"</span>&#125;</div><div class="line">&#123;<span class="string">"result"</span>: <span class="string">"Minor"</span>&#125;</div><div class="line">&#123;<span class="string">"result"</span>: <span class="string">"Minor"</span>&#125;</div><div class="line">&#123;<span class="string">"result"</span>: <span class="string">"Minor"</span>&#125;</div><div class="line">&#123;<span class="string">"result"</span>: <span class="string">"Minor"</span>&#125;</div><div class="line">&#123;<span class="string">"result"</span>: <span class="string">"Adult"</span>&#125;</div><div class="line">&#123;<span class="string">"result"</span>: <span class="string">"Minor"</span>&#125;</div><div class="line">&#123;<span class="string">"result"</span>: <span class="string">"Minor"</span>&#125;</div><div class="line">共耗时<span class="number">3.3781440258</span>秒</div></pre></td></tr></table></figure></p>
+
       
     </div>
 
@@ -329,6 +342,16 @@
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Celery/" rel="tag"># Celery</a>
+          
+            <a href="/tags/tornado/" rel="tag"># tornado</a>
+          
+            <a href="/tags/tornado-celery/" rel="tag"># tornado-celery</a>
+          
+        </div>
       
 
       
@@ -394,8 +417,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -423,7 +455,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -448,6 +480,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装tornado-celery"><span class="nav-number">1.</span> <span class="nav-text">安装tornado-celery</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用法"><span class="nav-number">2.</span> <span class="nav-text">用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实际测试"><span class="nav-number">3.</span> <span class="nav-text">实际测试</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
