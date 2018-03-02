@@ -45,7 +45,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="正则," />
+  <meta name="keywords" content="二叉树,数据结构," />
 
 
 
@@ -61,22 +61,22 @@
 
 
 
-<meta name="description" content="大体思路：对字符串和模式串按位匹配，递归处理。退出递归的条件是两个字符串均为空(True)或字符串不为空且模式串为空(False)。问题：如果字符串为空，模式串不为空呢？举个栗子：字符串 &amp;quot;&amp;quot;，模式串&amp;quot;a*b*c*&amp;quot;，显而易见，因为此情况的存在，所以不能作为退出递归的条件。
+<meta name="description" content="Leetcode上二叉树的前中后序遍历问题，都写着同一个note，Recursive solution is trivial, could you do it iteratively? 
 
-具体处理：如何按位匹配呢？可以分成两种情况，模式串有*和无*无*的情况很简单，">
+用迭代实现，三种均要使用辅助栈">
 <meta property="og:type" content="article">
-<meta property="og:title" content="用函数实现正则匹配中"."和"*"的功能">
-<meta property="og:url" content="http://yoursite.com/2017/12/03/手写正则匹配实现-和-的功能/index.html">
+<meta property="og:title" content="二叉树（四）—— 使用迭代完成二叉树的前中后序遍历">
+<meta property="og:url" content="http://yoursite.com/2018/11/13/二叉树4/index.html">
 <meta property="og:site_name" content="Oasis's Blog">
-<meta property="og:description" content="大体思路：对字符串和模式串按位匹配，递归处理。退出递归的条件是两个字符串均为空(True)或字符串不为空且模式串为空(False)。问题：如果字符串为空，模式串不为空呢？举个栗子：字符串 &amp;quot;&amp;quot;，模式串&amp;quot;a*b*c*&amp;quot;，显而易见，因为此情况的存在，所以不能作为退出递归的条件。
+<meta property="og:description" content="Leetcode上二叉树的前中后序遍历问题，都写着同一个note，Recursive solution is trivial, could you do it iteratively? 
 
-具体处理：如何按位匹配呢？可以分成两种情况，模式串有*和无*无*的情况很简单，">
-<meta property="og:updated_time" content="2018-02-17T17:33:05.568Z">
+用迭代实现，三种均要使用辅助栈">
+<meta property="og:updated_time" content="2018-03-02T07:13:33.844Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="用函数实现正则匹配中"."和"*"的功能">
-<meta name="twitter:description" content="大体思路：对字符串和模式串按位匹配，递归处理。退出递归的条件是两个字符串均为空(True)或字符串不为空且模式串为空(False)。问题：如果字符串为空，模式串不为空呢？举个栗子：字符串 &amp;quot;&amp;quot;，模式串&amp;quot;a*b*c*&amp;quot;，显而易见，因为此情况的存在，所以不能作为退出递归的条件。
+<meta name="twitter:title" content="二叉树（四）—— 使用迭代完成二叉树的前中后序遍历">
+<meta name="twitter:description" content="Leetcode上二叉树的前中后序遍历问题，都写着同一个note，Recursive solution is trivial, could you do it iteratively? 
 
-具体处理：如何按位匹配呢？可以分成两种情况，模式串有*和无*无*的情况很简单，">
+用迭代实现，三种均要使用辅助栈">
 
 
 
@@ -104,13 +104,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/12/03/手写正则匹配实现-和-的功能/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/11/13/二叉树4/"/>
 
 
 
 
 
-  <title> 用函数实现正则匹配中"."和"*"的功能 | Oasis's Blog </title>
+  <title> 二叉树（四）—— 使用迭代完成二叉树的前中后序遍历 | Oasis's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -229,7 +229,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/03/手写正则匹配实现-和-的功能/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/13/二叉树4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Oasis">
@@ -250,7 +250,7 @@
             
             
               
-                用函数实现正则匹配中"."和"*"的功能
+                二叉树（四）—— 使用迭代完成二叉树的前中后序遍历
               
             
           </h1>
@@ -265,8 +265,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-03T18:32:36+08:00">
-                2017-12-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-13T21:01:01+08:00">
+                2018-11-13
               </time>
             
 
@@ -283,7 +283,7 @@
 
           
           
-             <span id="/2017/12/03/手写正则匹配实现-和-的功能/" class="leancloud_visitors" data-flag-title="用函数实现正则匹配中"."和"*"的功能">
+             <span id="/2018/11/13/二叉树4/" class="leancloud_visitors" data-flag-title="二叉树（四）—— 使用迭代完成二叉树的前中后序遍历">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -312,21 +312,22 @@
       
 
       
-        <hr>
+        <p>Leetcode上二叉树的前中后序遍历问题，都写着同一个note，Recursive solution is trivial, could you do it iteratively? </p>
+<hr>
+<p>用迭代实现，三种均要使用辅助栈<br><a id="more"></a></p>
 <ul>
-<li><p><strong>大体思路</strong>：对字符串和模式串按位匹配，递归处理。退出递归的条件是两个字符串均为空(True)或字符串不为空且模式串为空(False)。<br><strong>问题</strong>：如果字符串为空，模式串不为空呢？<br>举个栗子：<br>字符串 <code>&quot;&quot;</code>，模式串<code>&quot;a*b*c*&quot;</code>，显而易见，因为此情况的存在，所以不能作为退出递归的条件。</p>
+<li><p><strong>先序</strong><br>思路一：先序顺序为根左右，那么可以从根结点开始，先向左<strong>遍历</strong>并依次入栈。向左到达尽头后，将当前结点出栈，指针指向当前结点的右子结点，重复以上过程。<br>代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">preorder</span><span class="params">(root)</span>:</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</div><div class="line">        <span class="keyword">return</span></div><div class="line">    stack = []</div><div class="line">    <span class="keyword">while</span> stack <span class="keyword">or</span> root:</div><div class="line">        <span class="keyword">if</span> root:</div><div class="line">            print(root.val)</div><div class="line">            stack.append(root)</div><div class="line">            root.left</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            root = stack.pop()</div><div class="line">            root = root.right</div></pre></td></tr></table></figure>
+<p>  思路二：先将根节点入栈，然后判断是否有子结点，按照先右后左顺序入栈，保证左优先，出栈结点即遍历到的结点，重复此过程。<br>  代码：</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">preorder</span><span class="params">(root)</span>:</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</div><div class="line">        <span class="keyword">return</span></div><div class="line">    stack = [root]</div><div class="line">    <span class="keyword">while</span> stack:</div><div class="line">        node = stack.pop()</div><div class="line">        print(node.val)</div><div class="line">        <span class="keyword">if</span> node.right:</div><div class="line">            stack.append(node.right)</div><div class="line">        <span class="keyword">if</span> node.left:</div><div class="line">            stack.append(node.left)</div></pre></td></tr></table></figure>
 </li>
-<li><p><strong>具体处理</strong>：如何按位匹配呢？可以分成两种情况，模式串有<code>*</code>和无<code>*</code><br>无<code>*</code>的情况很简单，只需将字符串和模式串各移动一位即可；<br>有<code>*</code>的情况稍微有些复杂，<strong>第一种</strong>情况是<code>*</code>之前的字符没有匹配到，即匹配数量为0，需要将模式串移动两位，即跳过<code>x*</code>，字符串保持不变；<strong>第二种</strong>情况是<code>*</code>之前的字符匹配到了至少一次（或者是<code>.*</code>匹配），需要将字符串移动一位，模式串保持不变（此处匹配到一次或多次实际上是一样的）。如果匹配成功的话，最后的字符串和模式串可能会出现<code>x, x*x</code>这种情况，所以同时还要将模式串移动两位。</p>
+<li><p><strong>中序</strong><br>思路一：左根右，和先序的思路一类似，从根结点开始，向左行进依次入栈（尚未开始遍历）。到达尽头后将当前结点出栈（遍历开始），指针向右前进，重复以上过程，实现左-根-右的次序。<br>代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">inorder</span><span class="params">(root)</span>:</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</div><div class="line">        <span class="keyword">return</span></div><div class="line">    stack = []</div><div class="line">    <span class="keyword">while</span> stack <span class="keyword">or</span> root:</div><div class="line">        <span class="keyword">if</span> root:</div><div class="line">            stack.append(root)</div><div class="line">            root = root.left</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            root = stack.pop()</div><div class="line">            print(root.val)</div><div class="line">            root = root.right</div></pre></td></tr></table></figure>
 </li>
-</ul>
-<a id="more"></a>
-<ul>
-<li><p><strong>代码</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">isMatch</span><span class="params">(self, text, pattern)</span>:</span></div><div class="line">    <span class="comment"># 均为空，返回True</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> text <span class="keyword">and</span> <span class="keyword">not</span> pattern:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">    <span class="comment"># 匹配串不为空，模式串为空，返回False</span></div><div class="line">    <span class="keyword">if</span> text <span class="keyword">and</span> <span class="keyword">not</span> pattern:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">    <span class="comment"># 模式串第二位为*</span></div><div class="line">    <span class="keyword">if</span> len(pattern) &gt; <span class="number">1</span> <span class="keyword">and</span> pattern[<span class="number">1</span>] == <span class="string">"*"</span>:</div><div class="line">        <span class="comment"># 模式串*之前的字符在匹配串中匹配到了至少一次,注意处理匹配串的边界</span></div><div class="line">        <span class="keyword">if</span> len(text) &gt; <span class="number">0</span> <span class="keyword">and</span> (text[<span class="number">0</span>] == pattern[<span class="number">0</span>] <span class="keyword">or</span> pattern[<span class="number">0</span>] == <span class="string">"."</span>):</div><div class="line">            <span class="comment"># 两种情况：匹配串移动一位，模式串移动两位</span></div><div class="line">            <span class="keyword">return</span> isMatch(text, pattern[<span class="number">2</span>:]) <span class="keyword">or</span> isMatch(text[<span class="number">1</span>:], pattern)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="comment"># 模式串*之前匹配数为0，模式串移动两位</span></div><div class="line">            <span class="keyword">return</span> isMatch(text, pattern[<span class="number">2</span>:])</div><div class="line">    <span class="comment"># 模式串第二位不为*, 同样要注意匹配串的边界</span></div><div class="line">    <span class="keyword">if</span> len(text) &gt; <span class="number">0</span> <span class="keyword">and</span> (text[<span class="number">0</span>] == pattern[<span class="number">0</span>] <span class="keyword">or</span> pattern[<span class="number">0</span>] == <span class="string">"."</span>):</div><div class="line">        <span class="keyword">return</span> isMatch(text[<span class="number">1</span>:], pattern[<span class="number">1</span>:])</div><div class="line">    <span class="keyword">return</span> <span class="keyword">False</span></div></pre></td></tr></table></figure>
-</li>
-<li><p><strong>简化版本</strong><br>上面的代码略显繁琐，可以在其基础上进行简化。<br><strong>首先</strong>，退出递归的条件可简化为模式串为空时，返回匹配串布尔值的取反值；<strong>然后</strong>可以添加一个变量用来保存当前匹配串的首位是否匹配(保存布尔值)；<strong>最后</strong>把之前判断匹配首位是否匹配简化成短路逻辑。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">isMatch</span><span class="params">(text, pattern)</span>:</span></div><div class="line">    <span class="comment"># 递归退出条件</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> pattern:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">not</span> text</div><div class="line">    <span class="comment"># 首位匹配</span></div><div class="line">    first_match = bool(text) <span class="keyword">and</span> pattern[<span class="number">0</span>] <span class="keyword">in</span> [text[<span class="number">0</span>], <span class="string">"."</span>]</div><div class="line">    <span class="comment"># 模式串第2位是*</span></div><div class="line">    <span class="keyword">if</span> len(pattern) &gt; <span class="number">1</span> <span class="keyword">and</span> pattern[<span class="number">1</span>] == <span class="string">"*"</span>:</div><div class="line">        <span class="keyword">return</span> isMatch(text, pattern[<span class="number">2</span>:]) <span class="keyword">or</span> \</div><div class="line">               first_match <span class="keyword">and</span> isMatch(text[<span class="number">1</span>:], pattern)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">return</span> first_match <span class="keyword">and</span> isMatch(text[<span class="number">1</span>:], pattern[<span class="number">1</span>:])</div></pre></td></tr></table></figure>
-</li>
+<li><p><strong>后序</strong><br>思路一：后序遍历比前两种要复杂一点，因为需要将<strong>根结点</strong>后置，所以第一时间想到的是设置一个标识符，用来表示该结点是否已经访问过，也就是记录一下遍历的顺序。具体为结点右-左入栈，同时标识符为False(未访问)。然后出栈，判断当前结点是否访问过，如否，将当前结点的标识符设为True(已访问)并重新入栈；如是，表示遍历到了当前结点。重复以上过程。<br>代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">postorder</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</div><div class="line">        <span class="keyword">return</span></div><div class="line">    stack = [(root, <span class="keyword">False</span>)]</div><div class="line">    <span class="keyword">while</span> stack:</div><div class="line">        node, visited = stack.pop()</div><div class="line">        <span class="keyword">if</span> visited:</div><div class="line">            print(node.val)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            stack.append((node, <span class="keyword">True</span>))</div><div class="line">            <span class="keyword">if</span> node.right:</div><div class="line">                stack.append((node.right, <span class="keyword">False</span>))</div><div class="line">            <span class="keyword">if</span> node.left:</div><div class="line">                stack.append((node.left, <span class="keyword">False</span>))</div></pre></td></tr></table></figure>
+<p>  思路二：Leetcode上此题的要求是返回一个列表，保存遍历的结点元素，那么根据这个具体情况也可以按照先序的思路一，反向左-右的顺序入栈，这样出栈的顺序即可保证为根-右-左，然后逆序输出即可。<br>  代码：</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">postorder</span><span class="params">(root)</span>:</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</div><div class="line">        <span class="keyword">return</span></div><div class="line">    stack = [root]</div><div class="line">    rev_res = []</div><div class="line">    <span class="keyword">while</span> stack:</div><div class="line">        node = stack.pop()</div><div class="line">        rev_res.append(node.val)</div><div class="line">        <span class="keyword">if</span> node.left:</div><div class="line">            stack.append(node.left)</div><div class="line">        <span class="keyword">if</span> node.right:</div><div class="line">            stack.append(node.right)</div><div class="line">    <span class="keyword">return</span> rev_res[::<span class="number">-1</span>]</div></pre></td></tr></table></figure></li>
 </ul>
 
       
@@ -357,7 +358,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/正则/" rel="tag"># 正则</a>
+            <a href="/tags/二叉树/" rel="tag"># 二叉树</a>
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
           
         </div>
       
@@ -370,8 +373,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/10/二叉树3/" rel="next" title="二叉树（三）—— 序列化二叉树和反序列化二叉树">
-                <i class="fa fa-chevron-left"></i> 二叉树（三）—— 序列化二叉树和反序列化二叉树
+              <a href="/2017/12/03/手写正则匹配实现-和-的功能/" rel="next" title="用函数实现正则匹配中"."和"*"的功能">
+                <i class="fa fa-chevron-left"></i> 用函数实现正则匹配中"."和"*"的功能
               </a>
             
           </div>
@@ -379,10 +382,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/13/二叉树4/" rel="prev" title="二叉树（四）—— 使用迭代完成二叉树的前中后序遍历">
-                二叉树（四）—— 使用迭代完成二叉树的前中后序遍历 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
